@@ -1,4 +1,4 @@
-package com.vou.user_be.application.service;
+package com.vou.user_be.application.service.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;

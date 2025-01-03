@@ -1,4 +1,4 @@
-package com.vou.user_be.application.service;
+package com.vou.user_be.application.service.auth;
 
 import com.vou.user_be.adapter.in.web.exception.UserNotFoundException;
 import com.vou.user_be.adapter.in.web.exception.authenticate.MissingDataException;

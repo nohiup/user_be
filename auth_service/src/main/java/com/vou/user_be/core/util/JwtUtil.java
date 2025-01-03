@@ -18,7 +18,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))  // Hết hạn sau 1 giờ
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 6000))  // Hết hạn sau 1 giờ
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

@@ -1,13 +1,11 @@
-package com.vou.user_be.application.service;
+package com.vou.user_be.application.service.auth;
 
 import com.vou.user_be.adapter.in.web.dto.RegisterRequest;
 import com.vou.user_be.adapter.in.web.exception.authenticate.MissingDataException;
 import com.vou.user_be.adapter.in.web.exception.authenticate.UserDataExists;
-import com.vou.user_be.adapter.in.web.exception.authenticate.UserUnverified;
 import com.vou.user_be.adapter.out.persistence.UserRepository;
 import com.vou.user_be.domain.model.Users;
 import com.vou.user_be.infrastructure.security.CustomizedPasswordEncoder;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,20 +56,6 @@ public class UserService {
 
         // Lưu vào database
         return userRepository.save(newUser);
-
-//
-//        String encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
-//
-//        Users newUser = new Users();
-//        newUser.setFullName(registerRequest.getFullName());
-//        newUser.setUsername(registerRequest.getUsername());
-//        newUser.setPassword(encodedPassword);
-//        newUser.setEmail(registerRequest.getEmail());
-//        newUser.setPhone(registerRequest.getPhone());
-//        newUser.setRole(registerRequest.getRole());
-//
-//        // Lưu vào database
-//        return userRepository.save(newUser);
     }
 
     public boolean verifyUser(String email, String otp){
