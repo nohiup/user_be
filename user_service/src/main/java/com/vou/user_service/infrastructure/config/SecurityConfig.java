@@ -1,4 +1,4 @@
-package com.vou.user_be.infrastructure.config;
+package com.vou.user_service.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

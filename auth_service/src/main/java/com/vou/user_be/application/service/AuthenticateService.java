@@ -1,14 +1,14 @@
-package com.vou.user_be.application.service.auth;
+package com.vou.user_be.application.service;
 
 import com.vou.user_be.adapter.in.web.exception.UserNotFoundException;
 import com.vou.user_be.adapter.in.web.exception.authenticate.MissingDataException;
 import com.vou.user_be.adapter.in.web.exception.authenticate.WrongPassword;
 import com.vou.user_be.adapter.out.persistence.UserRepository;
+import com.vou.user_be.core.constant.AccountStatus;
 import com.vou.user_be.core.util.JwtUtil;
-import com.vou.user_be.domain.model.Users;
+import com.vou.user_be.domain.model.Auth;
 import com.vou.user_be.infrastructure.security.CustomizedPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,12 +30,15 @@ public class AuthenticateService {
             throw new MissingDataException("Missing required fields");
         }
         System.out.println(email + " " + password);
-        if (userRepository.findByEmail(email).isEmpty() || !userRepository.findByEmail(email).get().getIs_verified()) {
+        if (userRepository.findByEmail(email).isEmpty()
+                || userRepository.findByEmail(email).get().getStatus().equals(AccountStatus.getInstance().PENDING)
+                || userRepository.findByEmail(email).get().getStatus().equals(AccountStatus.getInstance().DISABLED)) {
             throw new UserNotFoundException("User not found");
         }
 
-        Users user = userRepository.findByEmail(email).get();
+        Auth user = userRepository.findByEmail(email).get();
 
+        // Kiểm tra password
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new WrongPassword("Invalid credentials");
         }

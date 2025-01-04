@@ -1,7 +1,7 @@
 package com.vou.user_be.adapter.in.web.controller;
 
 
-import com.vou.user_be.application.service.auth.OtpServices;
+import com.vou.user_be.application.service.OtpServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

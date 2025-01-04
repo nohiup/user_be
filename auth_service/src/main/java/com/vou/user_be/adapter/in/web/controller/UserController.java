@@ -3,10 +3,11 @@ package com.vou.user_be.adapter.in.web.controller;
 import com.vou.user_be.adapter.in.web.dto.LoginRequest;
 import com.vou.user_be.adapter.in.web.dto.RegisterRequest;
 import com.vou.user_be.adapter.in.web.dto.VerifyRequest;
-import com.vou.user_be.application.service.auth.AuthenticateService;
-import com.vou.user_be.application.service.auth.UserService;
+import com.vou.user_be.application.grpc.UserGrpcClient;
+import com.vou.user_be.application.service.AuthenticateService;
+import com.vou.user_be.application.service.UserService;
 import com.vou.user_be.domain.model.JwtResponse;
-import com.vou.user_be.domain.model.Users;
+import com.vou.user_be.domain.model.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/auth")
 public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserGrpcClient userGrpcClient;
     @Autowired
     private AuthenticateService authenticateService;
 
@@ -29,8 +32,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
         try {
-            // Đăng ký người dùng mới
-            Users addedUser = userService.registerUser(registerRequest);
+            // ring ký nginx dùng mới
+            Auth addedUser = userService.registerUser(registerRequest);
             // Return response status
             return ResponseEntity.ok(addedUser);
         } catch (Exception e) {
@@ -41,15 +44,11 @@ public class UserController {
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestBody VerifyRequest verifyRequest){
-        try {
-            // Xác thực người dùng
-            boolean isVerified = userService.verifyUser(verifyRequest.getEmail(), verifyRequest.getOtp());
-            // Return response status
-            return ResponseEntity.ok(Map.of("Verified", isVerified));
-        } catch (Exception e) {
-            // Trả về lỗi nếu có
-            throw e;
-        }
+        // Xác thực nginx dùng
+        String id = userService.verifyUser(verifyRequest.getEmail(), verifyRequest.getOtp());
+        // Return response status
+        userGrpcClient.sendUserId(id);
+        return ResponseEntity.ok(Map.of("id", id));
     }
 
     @PostMapping("/login")

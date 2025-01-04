@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+
+option java_multiple_files = true;
+option java_package = "com.vou.proto";
+option java_outer_classname = "UserServiceProto";
+
+message UserIdMessage {
+  string userId = 1;
+}
+
+message Empty {
+
+}
+
+service UserService {
+  rpc receiveUserId(UserIdMessage) returns (Empty);
+}

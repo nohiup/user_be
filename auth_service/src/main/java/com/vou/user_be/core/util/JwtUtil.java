@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JwtUtil {
@@ -26,6 +27,12 @@ public class JwtUtil {
     // Lấy username từ JWT token
     public String extractUsername(String token) {
         return extractClaims(token).getSubject();
+    }
+
+    //Extract id from token
+    public UUID extractId(String token){
+        Claims claims = extractClaims(token);
+        return UUID.fromString(claims.get("id", String.class));
     }
 
     // Trích xuất vai trò từ token

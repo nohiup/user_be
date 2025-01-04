@@ -1,4 +1,4 @@
-package com.vou.user_be.application.service.auth;
+package com.vou.user_be.application.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -36,18 +36,6 @@ public class OtpServices {
             return "OTP sent to " + email;
         });
     }
-//    public void sendOtpEmail(String toEmail) {
-//        String otp = generateOtp();  // Tạo OTP ngẫu nhiên
-//
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(toEmail);
-//        message.setSubject("VOU - OTP Code");
-//        message.setText("Your OTP code for register verification is: " + otp);
-//
-//        emailSender.send(message);
-//        // Lưu OTP vào cơ sở dữ liệu hoặc Redis để xác thực sau này
-//        redisTemplate.opsForHash().put(toEmail, "otp", otp);
-//    }
 
     public boolean verifyOtp(String email, String otp){
         System.out.println(email + " " + otp);
