@@ -1,5 +1,6 @@
 package com.vou.user_be.infrastructure.grpc;
 
+import com.vou.common.proto.AuthInfoServiceGrpc;
 import com.vou.common.proto.AuthServiceGrpc;
 import com.vou.common.proto.UserInfoMessage;
 import com.vou.common.proto.UserInfoResponse;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
+public class AuthGrpcServiceImpl extends AuthInfoServiceGrpc.AuthServiceImplBase {
 
     public AuthGrpcServiceImpl(UserServiceGrpc.UserServiceBlockingStub userStub) {
         // Kết nối đến AuthService

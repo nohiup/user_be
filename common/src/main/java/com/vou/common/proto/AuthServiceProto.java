@@ -47,13 +47,12 @@ public final class AuthServiceProto {
       "InfoMessage\022\016\n\006userId\030\001 \001(\t\022\020\n\010userRole\030" +
       "\002 \001(\t\"#\n\020UserInfoResponse\022\017\n\007message\030\001 \001" +
       "(\t\"!\n\020AuthTokenMessage\022\r\n\005token\030\001 \001(\t\"$\n" +
-      "\021AuthTokenResponse\022\017\n\007message\030\001 \001(\t2N\n\017A" +
-      "uthInfoService\022;\n\nsendUserId\022\025.auth.User" +
-      "InfoMessage\032\026.auth.UserInfoResponse2P\n\020A" +
-      "uthTokenService\022<\n\tsendToken\022\026.auth.Auth" +
-      "TokenMessage\032\027.auth.AuthTokenResponseB*\n" +
-      "\024com.vou.common.protoB\020AuthServiceProtoP" +
-      "\001b\006proto3"
+      "\021AuthTokenResponse\022\017\n\007message\030\001 \001(\t2\210\001\n\013" +
+      "AuthService\022;\n\nsendUserId\022\025.auth.UserInf" +
+      "oMessage\032\026.auth.UserInfoResponse\022<\n\tsend" +
+      "Token\022\026.auth.AuthTokenMessage\032\027.auth.Aut" +
+      "hTokenResponseB*\n\024com.vou.common.protoB\020" +
+      "AuthServiceProtoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

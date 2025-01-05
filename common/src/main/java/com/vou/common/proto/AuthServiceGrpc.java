@@ -16,17 +16,52 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ *Service
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.9.1)",
     comments = "Source: proto/auth_service.proto")
-public final class AuthTokenServiceGrpc {
+public final class AuthServiceGrpc {
 
-  private AuthTokenServiceGrpc() {}
+  private AuthServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "auth.AuthTokenService";
+  public static final String SERVICE_NAME = "auth.AuthService";
 
   // Static method descriptors that strictly reflect the proto.
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  @java.lang.Deprecated // Use {@link #getSendUserIdMethod()} instead. 
+  public static final io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
+      com.vou.common.proto.UserInfoResponse> METHOD_SEND_USER_ID = getSendUserIdMethod();
+
+  private static volatile io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
+      com.vou.common.proto.UserInfoResponse> getSendUserIdMethod;
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
+      com.vou.common.proto.UserInfoResponse> getSendUserIdMethod() {
+    io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage, com.vou.common.proto.UserInfoResponse> getSendUserIdMethod;
+    if ((getSendUserIdMethod = AuthServiceGrpc.getSendUserIdMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getSendUserIdMethod = AuthServiceGrpc.getSendUserIdMethod) == null) {
+          AuthServiceGrpc.getSendUserIdMethod = getSendUserIdMethod = 
+              io.grpc.MethodDescriptor.<com.vou.common.proto.UserInfoMessage, com.vou.common.proto.UserInfoResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "auth.AuthService", "sendUserId"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.vou.common.proto.UserInfoMessage.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.vou.common.proto.UserInfoResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("sendUserId"))
+                  .build();
+          }
+        }
+     }
+     return getSendUserIdMethod;
+  }
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   @java.lang.Deprecated // Use {@link #getSendTokenMethod()} instead. 
   public static final io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage,
@@ -39,20 +74,20 @@ public final class AuthTokenServiceGrpc {
   public static io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage,
       com.vou.common.proto.AuthTokenResponse> getSendTokenMethod() {
     io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage, com.vou.common.proto.AuthTokenResponse> getSendTokenMethod;
-    if ((getSendTokenMethod = AuthTokenServiceGrpc.getSendTokenMethod) == null) {
-      synchronized (AuthTokenServiceGrpc.class) {
-        if ((getSendTokenMethod = AuthTokenServiceGrpc.getSendTokenMethod) == null) {
-          AuthTokenServiceGrpc.getSendTokenMethod = getSendTokenMethod = 
+    if ((getSendTokenMethod = AuthServiceGrpc.getSendTokenMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getSendTokenMethod = AuthServiceGrpc.getSendTokenMethod) == null) {
+          AuthServiceGrpc.getSendTokenMethod = getSendTokenMethod = 
               io.grpc.MethodDescriptor.<com.vou.common.proto.AuthTokenMessage, com.vou.common.proto.AuthTokenResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "auth.AuthTokenService", "sendToken"))
+                  "auth.AuthService", "sendToken"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.vou.common.proto.AuthTokenMessage.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.vou.common.proto.AuthTokenResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new AuthTokenServiceMethodDescriptorSupplier("sendToken"))
+                  .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("sendToken"))
                   .build();
           }
         }
@@ -63,29 +98,39 @@ public final class AuthTokenServiceGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static AuthTokenServiceStub newStub(io.grpc.Channel channel) {
-    return new AuthTokenServiceStub(channel);
+  public static AuthServiceStub newStub(io.grpc.Channel channel) {
+    return new AuthServiceStub(channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static AuthTokenServiceBlockingStub newBlockingStub(
+  public static AuthServiceBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new AuthTokenServiceBlockingStub(channel);
+    return new AuthServiceBlockingStub(channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static AuthTokenServiceFutureStub newFutureStub(
+  public static AuthServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new AuthTokenServiceFutureStub(channel);
+    return new AuthServiceFutureStub(channel);
   }
 
   /**
+   * <pre>
+   *Service
+   * </pre>
    */
-  public static abstract class AuthTokenServiceImplBase implements io.grpc.BindableService {
+  public static abstract class AuthServiceImplBase implements io.grpc.BindableService {
+
+    /**
+     */
+    public void sendUserId(com.vou.common.proto.UserInfoMessage request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSendUserIdMethod(), responseObserver);
+    }
 
     /**
      */
@@ -96,6 +141,13 @@ public final class AuthTokenServiceGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+          .addMethod(
+            getSendUserIdMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.vou.common.proto.UserInfoMessage,
+                com.vou.common.proto.UserInfoResponse>(
+                  this, METHODID_SEND_USER_ID)))
           .addMethod(
             getSendTokenMethod(),
             asyncUnaryCall(
@@ -108,21 +160,32 @@ public final class AuthTokenServiceGrpc {
   }
 
   /**
+   * <pre>
+   *Service
+   * </pre>
    */
-  public static final class AuthTokenServiceStub extends io.grpc.stub.AbstractStub<AuthTokenServiceStub> {
-    private AuthTokenServiceStub(io.grpc.Channel channel) {
+  public static final class AuthServiceStub extends io.grpc.stub.AbstractStub<AuthServiceStub> {
+    private AuthServiceStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private AuthTokenServiceStub(io.grpc.Channel channel,
+    private AuthServiceStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AuthTokenServiceStub build(io.grpc.Channel channel,
+    protected AuthServiceStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new AuthTokenServiceStub(channel, callOptions);
+      return new AuthServiceStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public void sendUserId(com.vou.common.proto.UserInfoMessage request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSendUserIdMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -135,21 +198,31 @@ public final class AuthTokenServiceGrpc {
   }
 
   /**
+   * <pre>
+   *Service
+   * </pre>
    */
-  public static final class AuthTokenServiceBlockingStub extends io.grpc.stub.AbstractStub<AuthTokenServiceBlockingStub> {
-    private AuthTokenServiceBlockingStub(io.grpc.Channel channel) {
+  public static final class AuthServiceBlockingStub extends io.grpc.stub.AbstractStub<AuthServiceBlockingStub> {
+    private AuthServiceBlockingStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private AuthTokenServiceBlockingStub(io.grpc.Channel channel,
+    private AuthServiceBlockingStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AuthTokenServiceBlockingStub build(io.grpc.Channel channel,
+    protected AuthServiceBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new AuthTokenServiceBlockingStub(channel, callOptions);
+      return new AuthServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.vou.common.proto.UserInfoResponse sendUserId(com.vou.common.proto.UserInfoMessage request) {
+      return blockingUnaryCall(
+          getChannel(), getSendUserIdMethod(), getCallOptions(), request);
     }
 
     /**
@@ -161,21 +234,32 @@ public final class AuthTokenServiceGrpc {
   }
 
   /**
+   * <pre>
+   *Service
+   * </pre>
    */
-  public static final class AuthTokenServiceFutureStub extends io.grpc.stub.AbstractStub<AuthTokenServiceFutureStub> {
-    private AuthTokenServiceFutureStub(io.grpc.Channel channel) {
+  public static final class AuthServiceFutureStub extends io.grpc.stub.AbstractStub<AuthServiceFutureStub> {
+    private AuthServiceFutureStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private AuthTokenServiceFutureStub(io.grpc.Channel channel,
+    private AuthServiceFutureStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AuthTokenServiceFutureStub build(io.grpc.Channel channel,
+    protected AuthServiceFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new AuthTokenServiceFutureStub(channel, callOptions);
+      return new AuthServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.proto.UserInfoResponse> sendUserId(
+        com.vou.common.proto.UserInfoMessage request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSendUserIdMethod(), getCallOptions()), request);
     }
 
     /**
@@ -187,17 +271,18 @@ public final class AuthTokenServiceGrpc {
     }
   }
 
-  private static final int METHODID_SEND_TOKEN = 0;
+  private static final int METHODID_SEND_USER_ID = 0;
+  private static final int METHODID_SEND_TOKEN = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final AuthTokenServiceImplBase serviceImpl;
+    private final AuthServiceImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(AuthTokenServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AuthServiceImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -206,6 +291,10 @@ public final class AuthTokenServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_SEND_USER_ID:
+          serviceImpl.sendUserId((com.vou.common.proto.UserInfoMessage) request,
+              (io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse>) responseObserver);
+          break;
         case METHODID_SEND_TOKEN:
           serviceImpl.sendToken((com.vou.common.proto.AuthTokenMessage) request,
               (io.grpc.stub.StreamObserver<com.vou.common.proto.AuthTokenResponse>) responseObserver);
@@ -226,9 +315,9 @@ public final class AuthTokenServiceGrpc {
     }
   }
 
-  private static abstract class AuthTokenServiceBaseDescriptorSupplier
+  private static abstract class AuthServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    AuthTokenServiceBaseDescriptorSupplier() {}
+    AuthServiceBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -237,21 +326,21 @@ public final class AuthTokenServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("AuthTokenService");
+      return getFileDescriptor().findServiceByName("AuthService");
     }
   }
 
-  private static final class AuthTokenServiceFileDescriptorSupplier
-      extends AuthTokenServiceBaseDescriptorSupplier {
-    AuthTokenServiceFileDescriptorSupplier() {}
+  private static final class AuthServiceFileDescriptorSupplier
+      extends AuthServiceBaseDescriptorSupplier {
+    AuthServiceFileDescriptorSupplier() {}
   }
 
-  private static final class AuthTokenServiceMethodDescriptorSupplier
-      extends AuthTokenServiceBaseDescriptorSupplier
+  private static final class AuthServiceMethodDescriptorSupplier
+      extends AuthServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final String methodName;
 
-    AuthTokenServiceMethodDescriptorSupplier(String methodName) {
+    AuthServiceMethodDescriptorSupplier(String methodName) {
       this.methodName = methodName;
     }
 
@@ -266,11 +355,12 @@ public final class AuthTokenServiceGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (AuthTokenServiceGrpc.class) {
+      synchronized (AuthServiceGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new AuthTokenServiceFileDescriptorSupplier())
+              .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
+              .addMethod(getSendUserIdMethod())
               .addMethod(getSendTokenMethod())
               .build();
         }

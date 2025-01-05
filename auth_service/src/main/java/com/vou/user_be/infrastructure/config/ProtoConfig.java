@@ -1,5 +1,6 @@
 package com.vou.user_be.infrastructure.config;
 
+import com.vou.common.proto.AuthInfoServiceGrpc;
 import com.vou.common.proto.AuthServiceGrpc;
 import com.vou.common.proto.UserServiceGrpc;
 import io.grpc.ManagedChannel;
@@ -18,12 +19,8 @@ public class ProtoConfig {
     }
 
     @Bean
-    public AuthServiceGrpc.AuthServiceBlockingStub authServiceBlockingStub(ManagedChannel managedChannel) {
-        return AuthServiceGrpc.newBlockingStub(managedChannel());
-    }
-    @Bean
-    public UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub(ManagedChannel managedChannel) {
-        return UserServiceGrpc.newBlockingStub(managedChannel());
+    public AuthInfoServiceGrpc.AuthInfoServiceBlockingStub authServiceBlockingStub(ManagedChannel managedChannel) {
+        return AuthInfoServiceGrpc.newBlockingStub(managedChannel());
     }
 
 }

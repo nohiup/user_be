@@ -25,13 +25,13 @@ message AuthTokenResponse{
 }
 
 //Service
-service AuthInfoService {
-  rpc sendUserId(UserInfoMessage) returns (UserInfoResponse);
-}
+service AuthService{
 
-service AuthTokenService{
+  rpc sendUserId(UserInfoMessage) returns (UserInfoResponse);
+
   rpc sendToken(AuthTokenMessage) returns (AuthTokenResponse);
 }
+
 
 
 
