@@ -45,10 +45,11 @@ public class UserController {
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestBody VerifyRequest verifyRequest){
         // Xác thực nginx dùng
-        String id = userService.verifyUser(verifyRequest.getEmail(), verifyRequest.getOtp());
+        Auth user = userService.verifyUser(verifyRequest.getEmail(), verifyRequest.getOtp());
+        userGrpcClient.sendUserId(user);
         // Return response status
-        userGrpcClient.sendUserId(id);
-        return ResponseEntity.ok(Map.of("id", id));
+
+        return ResponseEntity.ok(Map.of("id", user.getId()));
     }
 
     @PostMapping("/login")

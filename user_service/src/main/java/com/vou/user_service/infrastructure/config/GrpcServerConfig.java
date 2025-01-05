@@ -10,10 +10,13 @@ import org.springframework.context.annotation.Configuration;
 public class GrpcServerConfig {
 
     @Bean
-    public Server grpcServer(UserGrpcServiceImpl authGrpcService) throws Exception {
-        return ServerBuilder.forPort(9090)
-                .addService(authGrpcService)
+    public Server grpcServer(UserGrpcServiceImpl userGrpcService) throws Exception {
+        Server server =  ServerBuilder.forPort(9091)
+                .addService(userGrpcService)
                 .build()
                 .start();
+        // Add a shutdown hook to stop the server gracefully
+        Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
+        return server;
     }
 }

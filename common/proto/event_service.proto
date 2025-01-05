@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package event;
+
+option java_multiple_files = true;
+option java_package = "com.vou.common.proto";
+option java_outer_classname = "EventServiceProto";
+
+//Regularly to get brand info
+message RequestUser {
+  string userId = 1;
+}
+
+message ResponseBrand {
+  bytes id = 1;              // ID dạng binary (UUID)
+  string name = 2;           // Tên thương hiệu
+  string phone = 3;          // Số điện thoại
+  string field = 4;          // Lĩnh vực hoạt động
+  Point address = 5;         // Địa chỉ (dạng tọa độ)
+  string status = 6;         // Trạng thái ('active' hoặc 'inactive')
+}
+
+message Point {
+  double x = 1;              // Tọa độ X (kinh độ)
+  double y = 2;              // Tọa độ Y (vĩ độ)
+}
+
+service GetBrandService {
+  rpc getBrand(RequestUser) returns (ResponseBrand);
+}

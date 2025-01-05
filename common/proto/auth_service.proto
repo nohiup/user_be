@@ -3,22 +3,34 @@ syntax = "proto3";
 package auth;
 
 option java_multiple_files = true;  // Tạo một file Java cho mỗi message và service
-option java_package = "com.vou.proto";  // Chỉ định package chung cho tất cả các lớp Java
+option java_package = "com.vou.common.proto";  // Chỉ định package chung cho tất cả các lớp Java
 option java_outer_classname = "AuthServiceProto";  // Tên của lớp Java chứa các lớp message và service
 
-//Auth send to user
-message UserIdMessage {
+//Auth send info
+message UserInfoMessage {
   string userId = 1;
+  string userRole = 2;
+}
+//Auth info response
+message UserInfoResponse {
+  string message = 1;
 }
 
-message Empty {
-
+message AuthTokenMessage{
+  string token = 1;
 }
-//Auth send to ...
+
+message AuthTokenResponse{
+  string message = 1;
+}
 
 //Service
-service AuthService {
-  rpc sendUserId(UserIdMessage) returns (Empty);
+service AuthInfoService {
+  rpc sendUserId(UserInfoMessage) returns (UserInfoResponse);
+}
+
+service AuthTokenService{
+  rpc sendToken(AuthTokenMessage) returns (AuthTokenResponse);
 }
 
 

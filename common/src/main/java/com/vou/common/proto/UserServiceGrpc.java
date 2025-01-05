@@ -1,11 +1,18 @@
-package com.vou.common;
+package com.vou.common.proto;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;
 import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
 import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
@@ -21,36 +28,36 @@ public final class UserServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getReceiveUserIdMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<com.vou.common.UserIdMessage,
-      com.vou.common.Empty> METHOD_RECEIVE_USER_ID = getReceiveUserIdMethod();
+  @java.lang.Deprecated // Use {@link #getGetAuthMethod()} instead. 
+  public static final io.grpc.MethodDescriptor<com.vou.common.proto.RequestAuth,
+      com.vou.common.proto.ResponseAuth> METHOD_GET_AUTH = getGetAuthMethod();
 
-  private static volatile io.grpc.MethodDescriptor<com.vou.common.UserIdMessage,
-      com.vou.common.Empty> getReceiveUserIdMethod;
+  private static volatile io.grpc.MethodDescriptor<com.vou.common.proto.RequestAuth,
+      com.vou.common.proto.ResponseAuth> getGetAuthMethod;
 
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<com.vou.common.UserIdMessage,
-      com.vou.common.Empty> getReceiveUserIdMethod() {
-    io.grpc.MethodDescriptor<com.vou.common.UserIdMessage, com.vou.common.Empty> getReceiveUserIdMethod;
-    if ((getReceiveUserIdMethod = UserServiceGrpc.getReceiveUserIdMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.vou.common.proto.RequestAuth,
+      com.vou.common.proto.ResponseAuth> getGetAuthMethod() {
+    io.grpc.MethodDescriptor<com.vou.common.proto.RequestAuth, com.vou.common.proto.ResponseAuth> getGetAuthMethod;
+    if ((getGetAuthMethod = UserServiceGrpc.getGetAuthMethod) == null) {
       synchronized (UserServiceGrpc.class) {
-        if ((getReceiveUserIdMethod = UserServiceGrpc.getReceiveUserIdMethod) == null) {
-          UserServiceGrpc.getReceiveUserIdMethod = getReceiveUserIdMethod = 
-              io.grpc.MethodDescriptor.<com.vou.common.UserIdMessage, com.vou.common.Empty>newBuilder()
+        if ((getGetAuthMethod = UserServiceGrpc.getGetAuthMethod) == null) {
+          UserServiceGrpc.getGetAuthMethod = getGetAuthMethod = 
+              io.grpc.MethodDescriptor.<com.vou.common.proto.RequestAuth, com.vou.common.proto.ResponseAuth>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "user.UserService", "receiveUserId"))
+                  "user.UserService", "getAuth"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.UserIdMessage.getDefaultInstance()))
+                  com.vou.common.proto.RequestAuth.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("receiveUserId"))
+                  com.vou.common.proto.ResponseAuth.getDefaultInstance()))
+                  .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("getAuth"))
                   .build();
           }
         }
      }
-     return getReceiveUserIdMethod;
+     return getGetAuthMethod;
   }
 
   /**
@@ -82,20 +89,20 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public void receiveUserId(com.vou.common.UserIdMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.Empty> responseObserver) {
-      asyncUnimplementedUnaryCall(getReceiveUserIdMethod(), responseObserver);
+    public void getAuth(com.vou.common.proto.RequestAuth request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.ResponseAuth> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetAuthMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getReceiveUserIdMethod(),
+            getGetAuthMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.vou.common.UserIdMessage,
-                com.vou.common.Empty>(
-                  this, METHODID_RECEIVE_USER_ID)))
+                com.vou.common.proto.RequestAuth,
+                com.vou.common.proto.ResponseAuth>(
+                  this, METHODID_GET_AUTH)))
           .build();
     }
   }
@@ -120,10 +127,10 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public void receiveUserId(com.vou.common.UserIdMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.Empty> responseObserver) {
+    public void getAuth(com.vou.common.proto.RequestAuth request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.ResponseAuth> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getReceiveUserIdMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetAuthMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -147,9 +154,9 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public com.vou.common.Empty receiveUserId(com.vou.common.UserIdMessage request) {
+    public com.vou.common.proto.ResponseAuth getAuth(com.vou.common.proto.RequestAuth request) {
       return blockingUnaryCall(
-          getChannel(), getReceiveUserIdMethod(), getCallOptions(), request);
+          getChannel(), getGetAuthMethod(), getCallOptions(), request);
     }
   }
 
@@ -173,14 +180,14 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.Empty> receiveUserId(
-        com.vou.common.UserIdMessage request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.proto.ResponseAuth> getAuth(
+        com.vou.common.proto.RequestAuth request) {
       return futureUnaryCall(
-          getChannel().newCall(getReceiveUserIdMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetAuthMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_RECEIVE_USER_ID = 0;
+  private static final int METHODID_GET_AUTH = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -199,9 +206,9 @@ public final class UserServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_RECEIVE_USER_ID:
-          serviceImpl.receiveUserId((com.vou.common.UserIdMessage) request,
-              (io.grpc.stub.StreamObserver<com.vou.common.Empty>) responseObserver);
+        case METHODID_GET_AUTH:
+          serviceImpl.getAuth((com.vou.common.proto.RequestAuth) request,
+              (io.grpc.stub.StreamObserver<com.vou.common.proto.ResponseAuth>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -225,7 +232,7 @@ public final class UserServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.vou.common.UserServiceProto.getDescriptor();
+      return com.vou.common.proto.UserServiceProto.getDescriptor();
     }
 
     @java.lang.Override
@@ -264,7 +271,7 @@ public final class UserServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new UserServiceFileDescriptorSupplier())
-              .addMethod(getReceiveUserIdMethod())
+              .addMethod(getGetAuthMethod())
               .build();
         }
       }

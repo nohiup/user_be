@@ -1,31 +1,29 @@
 package com.vou.user_be.infrastructure.grpc;
 
-import com.vou.common.AuthServiceGrpc;
-import com.vou.common.Empty;
-import com.vou.common.UserIdMessage;
-import com.vou.common.UserServiceGrpc;
+import com.vou.common.proto.AuthServiceGrpc;
+import com.vou.common.proto.UserInfoMessage;
+import com.vou.common.proto.UserInfoResponse;
+import com.vou.common.proto.UserServiceGrpc;
 import com.vou.user_be.application.grpc.UserGrpcClient;
 
 import io.grpc.stub.StreamObserver;
+import org.springframework.stereotype.Service;
 
 
+@Service
 public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
-    private final UserGrpcClient userClient;
 
     public AuthGrpcServiceImpl(UserServiceGrpc.UserServiceBlockingStub userStub) {
-        // Kết nối đến UserService
-        this.userClient = new UserGrpcClient(userStub); // Địa chỉ UserService
+        // Kết nối đến AuthService
+        UserGrpcClient userGrpcClient = new UserGrpcClient(userStub); // Địa chỉ AuthService
     }
     @Override
-    public void sendUserId(UserIdMessage request, StreamObserver<Empty> responseObserver) {
-        // Kết nối đến UserService
-        System.out.println("AuthService received userId: " + request.getUserId());
-
+    public void sendUserId(UserInfoMessage request, StreamObserver<UserInfoResponse> responseObserver) {
         // Gửi userId đến UserService
-        userClient.sendUserId(request.getUserId());
+        System.out.println("Passed here");
 
         // Phản hồi lại client gọi AuthService
-        responseObserver.onNext(Empty.newBuilder().build());
+        responseObserver.onNext(UserInfoResponse.newBuilder().build());
         responseObserver.onCompleted();
     }
 }

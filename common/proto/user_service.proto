@@ -3,17 +3,23 @@ syntax = "proto3";
 package user;
 
 option java_multiple_files = true;
-option java_package = "com.vou.proto";
+option java_package = "com.vou.common.proto";
 option java_outer_classname = "UserServiceProto";
 
-message UserIdMessage {
+//Request Auth Info - For Admins & User UI
+message RequestAuth{
   string userId = 1;
 }
 
-message Empty {
-
+message ResponseAuth{
+  string userId = 1;
+  string username = 2;
+  string email = 3;
+  string role = 4;
+  string status = 5;
 }
 
-service UserService {
-  rpc receiveUserId(UserIdMessage) returns (Empty);
+
+service UserService{
+  rpc getAuth(RequestAuth) returns (ResponseAuth);
 }

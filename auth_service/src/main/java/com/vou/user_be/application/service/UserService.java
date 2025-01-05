@@ -61,12 +61,11 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public String verifyUser(String email, String otp){
+    public Auth verifyUser(String email, String otp){
         try {
             boolean isVerified = otpServices.verifyOtp(email, otp);
             userRepository.updateStatus(email, AccountStatus.getInstance().VERIFIED);
-            UUID id = userRepository.findByEmail(email).get().getId();
-            return id.toString();
+            return userRepository.findByEmail(email).get();
 
         } catch (Exception e) {
             e.printStackTrace();

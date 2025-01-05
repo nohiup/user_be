@@ -1,20 +1,23 @@
 package com.vou.user_service.infrastructure.grpc;
 
-import com.vou.common.Empty;
-import com.vou.common.UserIdMessage;
-import com.vou.common.UserServiceGrpc;
+import com.vou.common.proto.UserInfoMessage;
+import com.vou.common.proto.UserInfoResponse;
+import com.vou.common.proto.UserServiceGrpc;
 import io.grpc.stub.StreamObserver;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserGrpcServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
-    public void receiveUserId(UserIdMessage request, StreamObserver<Empty> responseObserver) {
+    public void receiveUserId(UserInfoMessage request, StreamObserver<UserInfoResponse> responseObserver) {
         // In ra userId nhận được
         System.out.println("UserService received userId: " + request.getUserId());
 
         // Xử lý logic cần thiết (lưu vào DB, v.v.)
 
         // Gửi phản hồi về AuthService
-        responseObserver.onNext(Empty.newBuilder().build());
+        responseObserver.onNext(UserInfoResponse.newBuilder()
+                .setMessage("Received").build());
         responseObserver.onCompleted();
     }
 }
