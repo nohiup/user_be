@@ -1,6 +1,6 @@
 package com.vou.user_be.application.grpc;
 
-import com.vou.common.proto.AuthInfoServiceGrpc;
+import com.vou.common.proto.AuthServiceGrpc;
 import com.vou.common.proto.UserInfoMessage;
 import com.vou.common.proto.UserInfoResponse;
 import com.vou.common.proto.UserServiceGrpc;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserGrpcClient {
-    private final AuthInfoServiceGrpc.AuthInfoServiceBlockingStub userStub;
+    private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
 
-    public UserGrpcClient(AuthInfoServiceGrpc.AuthInfoServiceBlockingStub userStub){
-        this.userStub = userStub;
+    public UserGrpcClient(AuthServiceGrpc.AuthServiceBlockingStub auth){
+        this.authStub = auth;
     }
 
     public void sendUserId(Auth auth) {
@@ -26,7 +26,7 @@ public class UserGrpcClient {
                     .build();
 
             // Gửi request và nhận phản hồi
-            UserInfoResponse response =  userStub.sendUserId(request);
+            UserInfoResponse response =  authStub.sendUserId(request);
             System.out.println("UserGrpcClient received response: " + response.getMessage());
         } catch (Exception e) {
             e.printStackTrace();

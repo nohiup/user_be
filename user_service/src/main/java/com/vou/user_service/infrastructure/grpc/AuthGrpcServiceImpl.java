@@ -1,5 +1,6 @@
 package com.vou.user_service.infrastructure.grpc;
 
+import com.vou.common.proto.AuthServiceGrpc;
 import com.vou.common.proto.UserInfoMessage;
 import com.vou.common.proto.UserInfoResponse;
 import com.vou.common.proto.UserServiceGrpc;
@@ -7,9 +8,9 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserGrpcServiceImpl extends UserServiceGrpc.UserServiceImplBase {
+public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
     @Override
-    public void receiveUserId(UserInfoMessage request, StreamObserver<UserInfoResponse> responseObserver) {
+    public void sendUserId(UserInfoMessage request, StreamObserver<UserInfoResponse> responseObserver) {
         // In ra userId nhận được
         System.out.println("UserService received userId: " + request.getUserId());
 

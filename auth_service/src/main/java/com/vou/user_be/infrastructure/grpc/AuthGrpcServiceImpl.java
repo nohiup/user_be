@@ -1,20 +1,22 @@
 package com.vou.user_be.infrastructure.grpc;
 
-import com.vou.common.proto.AuthInfoServiceGrpc;
 import com.vou.common.proto.AuthServiceGrpc;
 import com.vou.common.proto.UserInfoMessage;
 import com.vou.common.proto.UserInfoResponse;
 import com.vou.common.proto.UserServiceGrpc;
 import com.vou.user_be.application.grpc.UserGrpcClient;
 
+import com.vou.user_be.domain.model.Auth;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
 
 
-@Service
-public class AuthGrpcServiceImpl extends AuthInfoServiceGrpc.AuthServiceImplBase {
+//Server for receiving data, not the client to send data
 
-    public AuthGrpcServiceImpl(UserServiceGrpc.UserServiceBlockingStub userStub) {
+@Service
+public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
+
+    public AuthGrpcServiceImpl(AuthServiceGrpc.AuthServiceBlockingStub userStub) {
         // Kết nối đến AuthService
         UserGrpcClient userGrpcClient = new UserGrpcClient(userStub); // Địa chỉ AuthService
     }
