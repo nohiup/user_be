@@ -9,11 +9,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<Auth, Long> {
     Auth findByUsername(String username);
-
+    @Query("SELECT * FROM Auth a where a.id = :id")
+    Auth findById(@Param("id") UUID id);
     Optional<Auth> findByEmail(String email);
     @Modifying
     @Transactional

@@ -1,4 +1,4 @@
-package com.vou.common.proto;
+package com.vou.common.proto.auth;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
@@ -31,68 +31,36 @@ public final class AuthServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getSendUserIdMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
-      com.vou.common.proto.UserInfoResponse> METHOD_SEND_USER_ID = getSendUserIdMethod();
+  @java.lang.Deprecated // Use {@link #getGetInfoMethod()} instead. 
+  public static final io.grpc.MethodDescriptor<com.vou.common.proto.auth.RequestInfoMessage,
+      com.vou.common.proto.auth.RequestInfoResponse> METHOD_GET_INFO = getGetInfoMethod();
 
-  private static volatile io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
-      com.vou.common.proto.UserInfoResponse> getSendUserIdMethod;
+  private static volatile io.grpc.MethodDescriptor<com.vou.common.proto.auth.RequestInfoMessage,
+      com.vou.common.proto.auth.RequestInfoResponse> getGetInfoMethod;
 
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage,
-      com.vou.common.proto.UserInfoResponse> getSendUserIdMethod() {
-    io.grpc.MethodDescriptor<com.vou.common.proto.UserInfoMessage, com.vou.common.proto.UserInfoResponse> getSendUserIdMethod;
-    if ((getSendUserIdMethod = AuthServiceGrpc.getSendUserIdMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.vou.common.proto.auth.RequestInfoMessage,
+      com.vou.common.proto.auth.RequestInfoResponse> getGetInfoMethod() {
+    io.grpc.MethodDescriptor<com.vou.common.proto.auth.RequestInfoMessage, com.vou.common.proto.auth.RequestInfoResponse> getGetInfoMethod;
+    if ((getGetInfoMethod = AuthServiceGrpc.getGetInfoMethod) == null) {
       synchronized (AuthServiceGrpc.class) {
-        if ((getSendUserIdMethod = AuthServiceGrpc.getSendUserIdMethod) == null) {
-          AuthServiceGrpc.getSendUserIdMethod = getSendUserIdMethod = 
-              io.grpc.MethodDescriptor.<com.vou.common.proto.UserInfoMessage, com.vou.common.proto.UserInfoResponse>newBuilder()
+        if ((getGetInfoMethod = AuthServiceGrpc.getGetInfoMethod) == null) {
+          AuthServiceGrpc.getGetInfoMethod = getGetInfoMethod = 
+              io.grpc.MethodDescriptor.<com.vou.common.proto.auth.RequestInfoMessage, com.vou.common.proto.auth.RequestInfoResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "auth.AuthService", "sendUserId"))
+                  "auth.AuthService", "getInfo"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.proto.UserInfoMessage.getDefaultInstance()))
+                  com.vou.common.proto.auth.RequestInfoMessage.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.proto.UserInfoResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("sendUserId"))
+                  com.vou.common.proto.auth.RequestInfoResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("getInfo"))
                   .build();
           }
         }
      }
-     return getSendUserIdMethod;
-  }
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getSendTokenMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage,
-      com.vou.common.proto.AuthTokenResponse> METHOD_SEND_TOKEN = getSendTokenMethod();
-
-  private static volatile io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage,
-      com.vou.common.proto.AuthTokenResponse> getSendTokenMethod;
-
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage,
-      com.vou.common.proto.AuthTokenResponse> getSendTokenMethod() {
-    io.grpc.MethodDescriptor<com.vou.common.proto.AuthTokenMessage, com.vou.common.proto.AuthTokenResponse> getSendTokenMethod;
-    if ((getSendTokenMethod = AuthServiceGrpc.getSendTokenMethod) == null) {
-      synchronized (AuthServiceGrpc.class) {
-        if ((getSendTokenMethod = AuthServiceGrpc.getSendTokenMethod) == null) {
-          AuthServiceGrpc.getSendTokenMethod = getSendTokenMethod = 
-              io.grpc.MethodDescriptor.<com.vou.common.proto.AuthTokenMessage, com.vou.common.proto.AuthTokenResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "auth.AuthService", "sendToken"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.proto.AuthTokenMessage.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.vou.common.proto.AuthTokenResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("sendToken"))
-                  .build();
-          }
-        }
-     }
-     return getSendTokenMethod;
+     return getGetInfoMethod;
   }
 
   /**
@@ -127,34 +95,20 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public void sendUserId(com.vou.common.proto.UserInfoMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getSendUserIdMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void sendToken(com.vou.common.proto.AuthTokenMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.proto.AuthTokenResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getSendTokenMethod(), responseObserver);
+    public void getInfo(com.vou.common.proto.auth.RequestInfoMessage request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.auth.RequestInfoResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetInfoMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getSendUserIdMethod(),
+            getGetInfoMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.vou.common.proto.UserInfoMessage,
-                com.vou.common.proto.UserInfoResponse>(
-                  this, METHODID_SEND_USER_ID)))
-          .addMethod(
-            getSendTokenMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.vou.common.proto.AuthTokenMessage,
-                com.vou.common.proto.AuthTokenResponse>(
-                  this, METHODID_SEND_TOKEN)))
+                com.vou.common.proto.auth.RequestInfoMessage,
+                com.vou.common.proto.auth.RequestInfoResponse>(
+                  this, METHODID_GET_INFO)))
           .build();
     }
   }
@@ -182,18 +136,10 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public void sendUserId(com.vou.common.proto.UserInfoMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse> responseObserver) {
+    public void getInfo(com.vou.common.proto.auth.RequestInfoMessage request,
+        io.grpc.stub.StreamObserver<com.vou.common.proto.auth.RequestInfoResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getSendUserIdMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void sendToken(com.vou.common.proto.AuthTokenMessage request,
-        io.grpc.stub.StreamObserver<com.vou.common.proto.AuthTokenResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getSendTokenMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetInfoMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -220,16 +166,9 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public com.vou.common.proto.UserInfoResponse sendUserId(com.vou.common.proto.UserInfoMessage request) {
+    public com.vou.common.proto.auth.RequestInfoResponse getInfo(com.vou.common.proto.auth.RequestInfoMessage request) {
       return blockingUnaryCall(
-          getChannel(), getSendUserIdMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.vou.common.proto.AuthTokenResponse sendToken(com.vou.common.proto.AuthTokenMessage request) {
-      return blockingUnaryCall(
-          getChannel(), getSendTokenMethod(), getCallOptions(), request);
+          getChannel(), getGetInfoMethod(), getCallOptions(), request);
     }
   }
 
@@ -256,23 +195,14 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.proto.UserInfoResponse> sendUserId(
-        com.vou.common.proto.UserInfoMessage request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.proto.auth.RequestInfoResponse> getInfo(
+        com.vou.common.proto.auth.RequestInfoMessage request) {
       return futureUnaryCall(
-          getChannel().newCall(getSendUserIdMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.vou.common.proto.AuthTokenResponse> sendToken(
-        com.vou.common.proto.AuthTokenMessage request) {
-      return futureUnaryCall(
-          getChannel().newCall(getSendTokenMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetInfoMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_SEND_USER_ID = 0;
-  private static final int METHODID_SEND_TOKEN = 1;
+  private static final int METHODID_GET_INFO = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -291,13 +221,9 @@ public final class AuthServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_SEND_USER_ID:
-          serviceImpl.sendUserId((com.vou.common.proto.UserInfoMessage) request,
-              (io.grpc.stub.StreamObserver<com.vou.common.proto.UserInfoResponse>) responseObserver);
-          break;
-        case METHODID_SEND_TOKEN:
-          serviceImpl.sendToken((com.vou.common.proto.AuthTokenMessage) request,
-              (io.grpc.stub.StreamObserver<com.vou.common.proto.AuthTokenResponse>) responseObserver);
+        case METHODID_GET_INFO:
+          serviceImpl.getInfo((com.vou.common.proto.auth.RequestInfoMessage) request,
+              (io.grpc.stub.StreamObserver<com.vou.common.proto.auth.RequestInfoResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -321,7 +247,7 @@ public final class AuthServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.vou.common.proto.AuthServiceProto.getDescriptor();
+      return com.vou.common.proto.auth.AuthReceiver.getDescriptor();
     }
 
     @java.lang.Override
@@ -360,8 +286,7 @@ public final class AuthServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
-              .addMethod(getSendUserIdMethod())
-              .addMethod(getSendTokenMethod())
+              .addMethod(getGetInfoMethod())
               .build();
         }
       }

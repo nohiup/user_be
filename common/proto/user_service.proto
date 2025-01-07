@@ -3,23 +3,70 @@ syntax = "proto3";
 package user;
 
 option java_multiple_files = true;
-option java_package = "com.vou.common.proto";
-option java_outer_classname = "UserServiceProto";
+option java_package = "com.vou.common.proto.user";
+option java_outer_classname = "UserReceiver";
 
-//Request Auth Info - For Admins & User UI
-message RequestAuth{
+//Receive UID from Auth
+message SendUIDMessage{
   string userId = 1;
-}
-
-message ResponseAuth{
-  string userId = 1;
-  string username = 2;
+  string role = 2;
   string email = 3;
-  string role = 4;
-  string status = 5;
 }
 
+message SendUIDResponse{
+  string message = 1;
+}
+
+//Receive GameService request: getUserIdFromEmail
+message GetUserIdFromEmailMessage{
+  string email = 1;
+}
+
+message GetUserIdFromEmailResponse{
+  string userId = 1;
+}
+
+//Receive request: getCurrentUserId
+message CurrentUIDMessage{
+  string message = 1;
+}
+message CurrentUIDResponse{
+  string userId = 1;
+}
 
 service UserService{
-  rpc getAuth(RequestAuth) returns (ResponseAuth);
+  rpc receiveUID(SendUIDMessage) returns (SendUIDResponse);
+  rpc getUserIdFromEmail(GetUserIdFromEmailMessage) returns (GetUserIdFromEmailResponse);
+  rpc getCurrentUserId(CurrentUIDMessage) returns (CurrentUIDResponse);
 }
+
+////Return from request user data
+//message RequestUserMessage{
+//  string userId = 1;
+//  string role = 2;
+//
+//}
+//
+//message RequestUserAdminResponse{
+//  string userId = 1;
+//  string fullName = 2;
+//  string email = 3;
+//  string phone = 4;
+//}
+//
+//message RequestUserBrandResponse{
+//  string userId = 1;
+//  string name = 2;
+//  string industry = 3;
+//  double gpsLat = 4;
+//  double gpsLong = 5;
+//  string status = 6;
+//}
+//
+//message RequestUserAppResponse{
+//  string userId = 1;
+//  string name = 2;
+//}
+//
+
+

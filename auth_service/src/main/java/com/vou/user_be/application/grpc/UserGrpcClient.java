@@ -1,32 +1,34 @@
 package com.vou.user_be.application.grpc;
 
-import com.vou.common.proto.AuthServiceGrpc;
-import com.vou.common.proto.UserInfoMessage;
-import com.vou.common.proto.UserInfoResponse;
-import com.vou.common.proto.UserServiceGrpc;
+import com.vou.common.proto.auth.AuthServiceGrpc;
+import com.vou.common.proto.user.SendUIDMessage;
+import com.vou.common.proto.user.SendUIDResponse;
+import com.vou.common.proto.user.UserServiceGrpc;
 import com.vou.user_be.domain.model.Auth;
-import com.vou.user_be.infrastructure.grpc.AuthGrpcServiceImpl;
 import org.springframework.stereotype.Service;
 
 
+
+//Client to send message to UserService server (receiver)
 @Service
 public class UserGrpcClient {
-    private final AuthServiceGrpc.AuthServiceBlockingStub authStub;
+    private final UserServiceGrpc.UserServiceBlockingStub userStub;
 
-    public UserGrpcClient(AuthServiceGrpc.AuthServiceBlockingStub auth){
-        this.authStub = auth;
+    public UserGrpcClient(UserServiceGrpc.UserServiceBlockingStub user){
+        this.userStub = user;
     }
 
     public void sendUserId(Auth auth) {
         // Tạo message
         try {
-            UserInfoMessage request = UserInfoMessage.newBuilder()
+            SendUIDMessage request = SendUIDMessage.newBuilder()
                     .setUserId(auth.getId().toString())
-                    .setUserRole(auth.getRole())
+                    .setRole(auth.getRole())
+                    .setEmail(auth.getEmail())
                     .build();
 
             // Gửi request và nhận phản hồi
-            UserInfoResponse response =  authStub.sendUserId(request);
+            SendUIDResponse response =  userStub.receiveUID(request);
             System.out.println("UserGrpcClient received response: " + response.getMessage());
         } catch (Exception e) {
             e.printStackTrace();

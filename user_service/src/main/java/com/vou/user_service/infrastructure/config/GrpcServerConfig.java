@@ -1,6 +1,6 @@
 package com.vou.user_service.infrastructure.config;
 
-import com.vou.user_service.infrastructure.grpc.AuthGrpcServiceImpl;
+import com.vou.user_service.infrastructure.grpc.UserGrpcServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class GrpcServerConfig {
 
     @Bean
-    public Server grpcServer(AuthGrpcServiceImpl userGrpcService) throws Exception {
+    public Server grpcServer(UserGrpcServiceImpl userGrpcService) throws Exception {
         Server server =  ServerBuilder.forPort(9091)
                 .addService(userGrpcService)
                 .build()
