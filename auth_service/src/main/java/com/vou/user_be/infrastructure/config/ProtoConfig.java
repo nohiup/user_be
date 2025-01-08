@@ -1,7 +1,6 @@
 package com.vou.user_be.infrastructure.config;
 
-import com.vou.common.proto.AuthServiceGrpc;
-import com.vou.common.proto.UserServiceGrpc;
+import com.vou.common.proto.auth.AuthServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.context.annotation.Bean;
