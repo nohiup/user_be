@@ -11,7 +11,7 @@ public class GrpcServerConfig {
 
     @Bean
     public Server grpcServer(AuthGrpcServiceImpl authGrpcService) throws Exception {
-        return ServerBuilder.forPort(9092)
+        return ServerBuilder.forPort(9093)
                 .addService(authGrpcService)
                 .build()
                 .start();
