@@ -7,8 +7,6 @@ import com.vou.common.proto.user.UserServiceGrpc;
 import com.vou.user_be.domain.model.Auth;
 import org.springframework.stereotype.Service;
 
-
-
 //Client to send message to UserService server (receiver)
 @Service
 public class UserGrpcClient {

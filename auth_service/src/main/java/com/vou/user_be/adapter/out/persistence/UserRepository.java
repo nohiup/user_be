@@ -14,7 +14,7 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<Auth, Long> {
     Auth findByUsername(String username);
-    @Query("SELECT * FROM Auth a where a.id = :id")
+    @Query("SELECT a FROM Auth a WHERE a.id = :id")
     Auth findById(@Param("id") UUID id);
     Optional<Auth> findByEmail(String email);
     @Modifying

@@ -18,7 +18,7 @@ import java.util.UUID;
 public class AuthGrpcServiceImpl extends AuthServiceGrpc.AuthServiceImplBase {
     final UserRepository _userRepo;
 
-    public AuthGrpcServiceImpl(AuthServiceGrpc.AuthServiceBlockingStub authStub, UserRepository userRepo) {
+    public AuthGrpcServiceImpl(UserRepository userRepo) {
         // Kết nối đến AuthService
 //        UserGrpcClient userGrpcClient = new UserGrpcClient(authStub); // Địa chỉ AuthService
         _userRepo = userRepo;
