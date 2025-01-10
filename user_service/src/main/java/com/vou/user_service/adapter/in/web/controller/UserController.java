@@ -1,5 +1,6 @@
 package com.vou.user_service.adapter.in.web.controller;
 
+import com.vou.user_service.adapter.in.web.dto.DeleteObjectRequest;
 import com.vou.user_service.adapter.in.web.dto.GetAllObjectRequest;
 import com.vou.user_service.adapter.in.web.dto.GetProfileRequest;
 import com.vou.user_service.adapter.in.web.dto.UpdateProfileRequest;
@@ -51,6 +52,18 @@ public class UserController {
             return ResponseEntity.ok().body(obj);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(Map.of("message","Failed to get all object: " + e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("message","An unexpected error occurred: " + e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteObject(@PathVariable String id, @RequestBody DeleteObjectRequest request) {
+        try {
+            userService.deleteObject(id, request);
+            return ResponseEntity.ok().body(Map.of("message", "Object deleted successfully"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(Map.of("message","Failed to delete object: " + e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("message","An unexpected error occurred: " + e.getMessage()));
         }

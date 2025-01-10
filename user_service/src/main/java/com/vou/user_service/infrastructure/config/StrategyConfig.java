@@ -3,9 +3,13 @@ package com.vou.user_service.infrastructure.config;
 import com.vou.user_service.application.service.strategy.create_user_strategy.CreateBrandStrategy;
 import com.vou.user_service.application.service.strategy.create_user_strategy.CreateObjectStrategy;
 import com.vou.user_service.application.service.strategy.create_user_strategy.CreateUserStrategy;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.DeleteBrandStrategy;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.DeleteObjectStrategy;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.DeleteUserStrategy;
 import com.vou.user_service.application.service.strategy.get_all_object_strategy.GetAllBrandStrategy;
 import com.vou.user_service.application.service.strategy.get_all_object_strategy.GetAllObjectStrategy;
 import com.vou.user_service.application.service.strategy.get_all_object_strategy.GetAllUserStrategy;
+import com.vou.user_service.application.service.strategy.get_profile_strategy.GetProfileAdminStrategy;
 import com.vou.user_service.application.service.strategy.get_profile_strategy.GetProfileBrandStrategy;
 import com.vou.user_service.application.service.strategy.get_profile_strategy.GetProfileStrategy;
 import com.vou.user_service.application.service.strategy.get_profile_strategy.GetProfileUserStrategy;
@@ -43,10 +47,12 @@ public class StrategyConfig {
     @Bean
     public Map<String, GetProfileStrategy> getProfileStrategy(
             GetProfileUserStrategy getProfileUserStrategy,
-            GetProfileBrandStrategy getProfileBrandStrategy) {
+            GetProfileBrandStrategy getProfileBrandStrategy,
+            GetProfileAdminStrategy getProfileAdminStrategy) {
         return Map.of(
                 "user", getProfileUserStrategy,
-                "brand", getProfileBrandStrategy
+                "brand", getProfileBrandStrategy,
+                "admin", getProfileAdminStrategy
         );
     }
 
@@ -57,6 +63,16 @@ public class StrategyConfig {
         return Map.of(
                 "user", getAllUserStrategy,
                 "brand", getAllBrandStrategy
+        );
+    }
+
+    @Bean
+    public Map<String, DeleteObjectStrategy> deleteObjectStrategy(
+            DeleteUserStrategy deleteUserStrategy,
+            DeleteBrandStrategy deleteBrandStrategy) {
+        return Map.of(
+                "user", deleteUserStrategy,
+                "brand", deleteBrandStrategy
         );
     }
 }
