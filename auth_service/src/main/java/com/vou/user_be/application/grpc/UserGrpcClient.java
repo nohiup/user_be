@@ -26,7 +26,7 @@ public class UserGrpcClient {
                     .build();
 
             // Gửi request và nhận phản hồi
-            SendUIDResponse response =  userStub.receiveUID(request);
+            SendUIDResponse response = userStub.receiveUID(request);
             System.out.println("UserGrpcClient received response: " + response.getMessage());
         } catch (Exception e) {
             e.printStackTrace();

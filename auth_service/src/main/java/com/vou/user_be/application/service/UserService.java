@@ -64,6 +64,9 @@ public class UserService {
     public Auth verifyUser(String email, String otp){
         try {
             boolean isVerified = otpServices.verifyOtp(email, otp);
+            if (!isVerified) {
+                return null;
+            }
             userRepository.updateStatus(email, AccountStatus.getInstance().VERIFIED);
             return userRepository.findByEmail(email).get();
 

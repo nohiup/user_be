@@ -38,9 +38,13 @@ public class OtpServices {
     }
 
     public boolean verifyOtp(String email, String otp){
+        redisTemplate.opsForValue().set("loda","hello world");
+        System.out.println("Value of key loda: "+ redisTemplate.opsForValue().get("loda"));
+
         System.out.println(email + " " + otp);
         String storedOtp = (String) redisTemplate.opsForValue().get(email);
         System.out.println("Stored OTP: " + storedOtp + " | Received OTP: " + otp);
+//        return true;
         return storedOtp.equals(otp);
     }
 

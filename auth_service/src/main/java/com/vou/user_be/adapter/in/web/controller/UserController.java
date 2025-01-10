@@ -46,10 +46,13 @@ public class UserController {
     public ResponseEntity<?> verifyUser(@RequestBody VerifyRequest verifyRequest){
         // Xác thực nginx dùng
         Auth user = userService.verifyUser(verifyRequest.getEmail(), verifyRequest.getOtp());
-        userGrpcClient.sendUserId(user);
-        // Return response status
 
-        return ResponseEntity.ok(Map.of("id", user.getId()));
+        if (user != null) {
+            userGrpcClient.sendUserId(user);
+            return ResponseEntity.ok(Map.of("id", user.getId()));
+        }
+        return ResponseEntity.status(400).body(Map.of("error","Invalid Credentials", "message", "OTP is incorrect"));
+
     }
 
     @PostMapping("/login")
