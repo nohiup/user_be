@@ -20,6 +20,7 @@ public class SecurityConfig{
                         .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/verify/otp").permitAll()
                         .requestMatchers("/api/auth/verify").permitAll()// Cho phép truy cập miễn phí
+                        .requestMatchers("/api/users/**").permitAll()// Cho phép truy cập miễn phí
                         .anyRequest().authenticated());  // Yêu cầu xác thực cho các endpoint còn lại// Yêu cầu xác thực cho các endpoint còn lại
         return http.sessionManagement(ses -> ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())

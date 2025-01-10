@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 auth_service/.env
+user_service/.env

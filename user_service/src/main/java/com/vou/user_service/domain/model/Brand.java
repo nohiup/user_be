@@ -1,75 +1,94 @@
 package com.vou.user_service.domain.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-import java.awt.*;
-import java.util.UUID;
+import javax.annotation.Nullable;
+import java.math.BigDecimal;
 
 @Entity
-public class Brand{
-    @Id
-    private UUID id;
+public class Brand extends BaseEntity{
+    @Nullable
     private String name;
-    private String phone;
-    private String field;
-    private Point address;
+
+    @Nullable
+    private String industry;
+
+    @Nullable
+    private String address;
+
+    @Nullable
+    private BigDecimal gps_lat;
+
+    @Nullable
+    private BigDecimal gps_long;
+
+    @Nullable
     private String status;
 
-    public Brand(UUID id, String name, String phone, String field, Point address, String status) {
-        this.id = id;
+    public Brand(@Nullable String name, @Nullable String industry, @Nullable String address, @Nullable BigDecimal gps_lat, @Nullable BigDecimal gps_long, @Nullable String status) {
         this.name = name;
-        this.phone = phone;
-        this.field = field;
+        this.industry = industry;
         this.address = address;
+        this.gps_lat = gps_lat;
+        this.gps_long = gps_long;
         this.status = status;
     }
 
-    public UUID getId() {
-        return id;
+    public Brand() {
+
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
+    @Nullable
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Nullable
+    public String getIndustry() {
+        return industry;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public Point getAddress() {
+    @Nullable
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Point address) {
-        this.address = address;
+    @Nullable
+    public BigDecimal getGps_lat() {
+        return gps_lat;
     }
 
+    @Nullable
+    public BigDecimal getGps_long() {
+        return gps_long;
+    }
+
+    @Nullable
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setName(@Nullable String name) {
+        this.name = name;
+    }
+
+    public void setIndustry(@Nullable String industry) {
+        this.industry = industry;
+    }
+
+    public void setAddress(@Nullable String address) {
+        this.address = address;
+    }
+
+    public void setGps_lat(@Nullable BigDecimal gps_lat) {
+        this.gps_lat = gps_lat;
+    }
+
+    public void setGps_long(@Nullable BigDecimal gps_long) {
+        this.gps_long = gps_long;
+    }
+
+    public void setStatus(@Nullable String status) {
         this.status = status;
     }
 }

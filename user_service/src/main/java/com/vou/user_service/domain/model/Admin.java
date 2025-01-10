@@ -12,12 +12,10 @@ public class Admin {
     private UUID id;
 
     private String name;
-    private String phone;
 
-    public Admin(UUID id, String name, String phone) {
+    public Admin(UUID id, String name) {
         this.id = id;
         this.name = name;
-        this.phone = phone;
     }
 
     public Admin() {
@@ -39,13 +37,5 @@ public class Admin {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 }
