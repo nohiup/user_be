@@ -7,14 +7,11 @@ import jakarta.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class Admin {
-    @Id
-    private UUID id;
+public class Admin extends BaseEntity{
 
     private String name;
 
-    public Admin(UUID id, String name) {
-        this.id = id;
+    public Admin(String name) {
         this.name = name;
     }
 
@@ -22,14 +19,6 @@ public class Admin {
     }
 
     // Getters
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
