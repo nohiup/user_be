@@ -1,6 +1,6 @@
 package com.vou.user_service.application.service.strategy.delete_object_strategy;
 
-import com.vou.user_service.adapter.out.persistence.BrandRepository;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.persistence.BrandRepository;
 import org.springframework.stereotype.Component;
 
 @Component

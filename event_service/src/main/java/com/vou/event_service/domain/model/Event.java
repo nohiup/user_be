@@ -12,22 +12,33 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     final UUID id;
-    final String name;
-    final String image;
+    String name;
+    String image;
+
+
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Voucher> vouchers;
 
-    final DateTime start;
-    final DateTime end;
 
+    private DateTime start;
+    private DateTime endDate; // Rename the field to endDate
 
-    public Event(UUID id, String name, String image, DateTime start, DateTime end, List<Voucher> vouchers) {
+    // Getters and setters
+    public List<Voucher> getVouchers() {
+        return vouchers;
+    }
+
+    public void setVouchers(List<Voucher> vouchers) {
+        this.vouchers = vouchers;
+    }
+
+    public Event(UUID id, String name, String image, DateTime start, DateTime endDate, List<Voucher> vouchers) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.start = start;
-        this.end = end;
+        this.endDate = endDate;
         this.vouchers = vouchers;
     }
 
@@ -43,19 +54,22 @@ public class Event {
         return image;
     }
 
-    public List<Voucher> getVouchers() {
-        return vouchers;
-    }
-
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
-    }
-
     public DateTime getStart() {
         return start;
     }
 
     public DateTime getEnd() {
-        return end;
+        return endDate;
     }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
 }

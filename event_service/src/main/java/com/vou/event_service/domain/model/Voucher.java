@@ -3,6 +3,8 @@ package com.vou.event_service.domain.model;
 import com.google.type.DateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.util.UUID;
 
@@ -27,6 +29,19 @@ public class Voucher {
         this.description = description;
         this.expired = expired;
         this.status = status;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
+    // Getters and Setters
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public UUID getId() {

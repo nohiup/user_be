@@ -1,4 +1,4 @@
-package com.vou.user_service.adapter.out.persistence;
+package com.vou.user_service.application.service.strategy.delete_object_strategy.persistence;
 
 import com.vou.user_service.domain.model.User;
 import org.jetbrains.annotations.NotNull;

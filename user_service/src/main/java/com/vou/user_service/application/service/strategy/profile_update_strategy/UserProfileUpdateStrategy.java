@@ -1,11 +1,9 @@
 package com.vou.user_service.application.service.strategy.profile_update_strategy;
 
 import com.vou.user_service.adapter.in.web.dto.UpdateProfileRequest;
-import com.vou.user_service.adapter.out.persistence.UserRepository;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.persistence.UserRepository;
 import com.vou.user_service.domain.model.User;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class UserProfileUpdateStrategy implements ProfileUpdateStrategy {

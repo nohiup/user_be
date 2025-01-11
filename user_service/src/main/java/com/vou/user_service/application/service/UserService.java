@@ -4,9 +4,8 @@ import com.vou.user_service.adapter.in.web.dto.DeleteObjectRequest;
 import com.vou.user_service.adapter.in.web.dto.GetAllObjectRequest;
 import com.vou.user_service.adapter.in.web.dto.GetProfileRequest;
 import com.vou.user_service.adapter.in.web.dto.UpdateProfileRequest;
-import com.vou.user_service.adapter.out.persistence.AdminRepository;
-import com.vou.user_service.adapter.out.persistence.BrandRepository;
-import com.vou.user_service.adapter.out.persistence.UserRepository;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.persistence.BrandRepository;
+import com.vou.user_service.application.service.strategy.delete_object_strategy.persistence.UserRepository;
 import com.vou.user_service.application.service.strategy.create_user_strategy.CreateObjectStrategy;
 import com.vou.user_service.application.service.strategy.delete_object_strategy.DeleteObjectStrategy;
 import com.vou.user_service.application.service.strategy.get_all_object_strategy.GetAllObjectStrategy;
@@ -17,7 +16,6 @@ import com.vou.user_service.domain.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class UserService {
