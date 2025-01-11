@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.*;
@@ -20,6 +21,11 @@ public class WebSocketConfig implements WebSocketConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketConfig.class);
     @Autowired
     private Environment environmentConfig;
+
+    @Autowired
+    private QuizWsHandler quizWsHandler;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     //Complex message broker for rabbitMQ
 //    @Override
@@ -46,15 +52,13 @@ public class WebSocketConfig implements WebSocketConfigurer {
         logger.info("WebSocket server is up and running at ws://localhost:8082/ws");
     }
 
-    @Bean
-    WebSocketHandler quizWebSocketHandler(){
-        logger.info("Calling qws handler");
-        return new QuizWsHandler();
-    }
+
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(quizWebSocketHandler(), "/quiz")
+        registry.addHandler(quizWsHandler, "/quiz")
                 .setAllowedOrigins("*");
     }
+
+
 }
