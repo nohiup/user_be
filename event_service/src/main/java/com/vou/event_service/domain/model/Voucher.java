@@ -1,16 +1,14 @@
 package com.vou.event_service.domain.model;
 
 import com.google.type.DateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 public class Voucher {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String code;
     private String qr;
