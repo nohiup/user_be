@@ -3,10 +3,12 @@ package com.vou.user_service;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import java.util.Objects;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class UserServiceApplication {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()
