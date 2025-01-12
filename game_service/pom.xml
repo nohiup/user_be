@@ -19,37 +19,43 @@
 
     <dependencies>
         <!--Additional dependencies -->
+        <dependency>
+            <groupId>com.vou</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/org.springframework.security/spring-security-web  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.security</groupId>-->
-<!--            <artifactId>spring-security-web</artifactId>-->
-<!--            <version>6.4.2</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--            <artifactId>jackson-databind</artifactId>-->
-<!--            <version>2.18.2</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--            <version>3.4.1</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-mail</artifactId>-->
-<!--            <version>3.4.1</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt  &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.jsonwebtoken</groupId>-->
-<!--            <artifactId>jjwt</artifactId>-->
-<!--            <version>0.12.6</version>-->
-<!--        </dependency>-->
+        <!--  https://mvnrepository.com/artifact/org.springframework.security/spring-security-web  -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>6.4.2</version>
+        </dependency>
+        <!--  https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind  -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.2</version>
+        </dependency>
+        <!--  https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!--  https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!--  https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt  -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.12.6</version>
+        </dependency>
+
     </dependencies>
 
 <build>
