@@ -33,10 +33,6 @@ public class Game {
     @JsonManagedReference  // This is the key to fix the issue
     private List<GameItems> gameItemsList;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    @JsonManagedReference  // This is the key to fix the issue
-    private List<GameItems> gameSessionsList;
-
     // Getters and Setters
     public UUID getId() {
         return id;

@@ -12,7 +12,8 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/api/events/**").permitAll() // Allow unrestricted access
+                        .pathMatchers("/api/games/**").permitAll() // Allow unrestricted access
+                        .pathMatchers("/api/gameItems/**").permitAll()
                         .anyExchange().authenticated() // Secure other endpoints
                 )
                 .csrf().disable() // Optional: Disable CSRF for APIs
