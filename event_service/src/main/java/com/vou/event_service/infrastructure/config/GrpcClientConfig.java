@@ -1,5 +1,7 @@
 package com.vou.event_service.infrastructure.config;
 
+import com.vou.common.proto.event.EventServiceGrpc;
+import com.vou.common.proto.game.GameServiceGrpc;
 import com.vou.common.proto.user.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -15,14 +17,12 @@ public class GrpcClientConfig {
                 .usePlaintext()
                 .build();
     }
-
-    //Auth client for self-sending???
-//    @Bean
-//    public AuthServiceGrpc.AuthServiceBlockingStub authServiceBlockingStub(ManagedChannel managedChannel) {
-//        return AuthServiceGrpc.newBlockingStub(managedUserChannel());
-//    }
-
     //UserClient for sending mess to userService
+    @Bean
+    public GameServiceGrpc.GameServiceBlockingStub gameServiceBlockingStub(ManagedChannel managedChannel){
+        return GameServiceGrpc.newBlockingStub(managedUserChannel());
+    }
+
     @Bean
     public UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub(ManagedChannel managedChannel){
         return UserServiceGrpc.newBlockingStub(managedUserChannel());

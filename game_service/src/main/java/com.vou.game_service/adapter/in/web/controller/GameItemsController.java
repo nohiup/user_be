@@ -16,11 +16,4 @@ public class GameItemsController {
     @Autowired
     private GameItemsService gameItemsService;
 
-    @PatchMapping("/{itemId}/update")
-    public ResponseEntity<GameItems> updateGameItem(
-            @PathVariable UUID itemId,
-            @RequestBody UpdateGameItemRequest updateRequest) {
-        GameItems updatedGameItem = gameItemsService.updateGameItem(itemId, updateRequest);
-        return ResponseEntity.ok(updatedGameItem);
-    }
 }

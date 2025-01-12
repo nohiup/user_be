@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GrpcClientConfig {
 
+
     @Bean
     public ManagedChannel managedUserChannel() {
         return ManagedChannelBuilder.forAddress("localhost", 9091) // Replace with user_service address

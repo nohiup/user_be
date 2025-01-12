@@ -12,7 +12,7 @@ import java.util.Objects;
 public class UserServiceApplication {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()
-                .directory("user_service")
+                .directory("F:\\SoftwareArchitecture\\user_be\\user_service")
                 .load();
         System.setProperty("DB_URL", Objects.requireNonNull(dotenv.get("DB_URL")));
         System.setProperty("DB_USERNAME", Objects.requireNonNull(dotenv.get("DB_USERNAME")));

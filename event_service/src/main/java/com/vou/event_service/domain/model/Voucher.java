@@ -28,6 +28,70 @@ public class Voucher {
     @JsonBackReference  // Preventing infinite recursion
     private Event event;
 
+    private Integer quantityV;
+    private Integer quantityO;
+    private Integer quantityU;
+    private Integer quantityC;
+    private Integer quantityH;
+    private Integer quantityE;
+    private Integer quantityR;
+
+    public Integer getQuantityV() {
+        return quantityV;
+    }
+
+    public void setQuantityV(Integer quantityV) {
+        this.quantityV = quantityV;
+    }
+
+    public Integer getQuantityO() {
+        return quantityO;
+    }
+
+    public void setQuantityO(Integer quantityO) {
+        this.quantityO = quantityO;
+    }
+
+    public Integer getQuantityU() {
+        return quantityU;
+    }
+
+    public void setQuantityU(Integer quantityU) {
+        this.quantityU = quantityU;
+    }
+
+    public Integer getQuantityC() {
+        return quantityC;
+    }
+
+    public void setQuantityC(Integer quantityC) {
+        this.quantityC = quantityC;
+    }
+
+    public Integer getQuantityH() {
+        return quantityH;
+    }
+
+    public void setQuantityH(Integer quantityH) {
+        this.quantityH = quantityH;
+    }
+
+    public Integer getQuantityE() {
+        return quantityE;
+    }
+
+    public void setQuantityE(Integer quantityE) {
+        this.quantityE = quantityE;
+    }
+
+    public Integer getQuantityR() {
+        return quantityR;
+    }
+
+    public void setQuantityR(Integer quantityR) {
+        this.quantityR = quantityR;
+    }
+
     // Getters and Setters
     public UUID getId() {
         return id;

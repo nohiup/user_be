@@ -15,26 +15,5 @@ public class GameItemsService {
     @Autowired
     private GameItemsRepository gameItemsRepository;
 
-    public GameItems updateGameItem(UUID itemId, UpdateGameItemRequest updateRequest) {
-        Optional<GameItems> optionalGameItem = gameItemsRepository.findById(itemId);
 
-        if (optionalGameItem.isEmpty()) {
-            throw new IllegalArgumentException("Game item with ID " + itemId + " not found.");
-        }
-
-        GameItems gameItem = optionalGameItem.get();
-
-        // Update fields if they are provided
-        if (updateRequest.getName() != null) {
-            gameItem.setName(updateRequest.getName());
-        }
-        if (updateRequest.getDescription() != null) {
-            gameItem.setDescription(updateRequest.getDescription());
-        }
-        if (updateRequest.getQuantity() != null) {
-            gameItem.setQuantity(updateRequest.getQuantity());
-        }
-
-        return gameItemsRepository.save(gameItem);
-    }
 }

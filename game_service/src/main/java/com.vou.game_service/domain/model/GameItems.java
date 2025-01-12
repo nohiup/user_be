@@ -12,22 +12,12 @@ public class GameItems {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String name;
+    @Column(nullable = false)
+    private Long eventId; // Foreign key referencing Events.event_id
 
-    private String description;
+    @Column(nullable = false)
+    private UUID gameId; // Foreign key referencing Games.game_id
 
-    private String quantity;
-
-    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private OffsetDateTime createdAt;
-
-    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private OffsetDateTime updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "game_id")
-    @JsonBackReference // Preventing infinite recursion
-    private Game game;
 
     // Getters and Setters
     public UUID getId() {
@@ -38,51 +28,20 @@ public class GameItems {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getEventId() {
+        return eventId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
-    public String getDescription() {
-        return description;
+    public UUID getGameId() {
+        return gameId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGameId(UUID gameId) {
+        this.gameId = gameId;
     }
 
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 }

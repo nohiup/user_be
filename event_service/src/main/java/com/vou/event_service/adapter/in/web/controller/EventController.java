@@ -3,6 +3,10 @@ package com.vou.event_service.adapter.in.web.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vou.common.proto.game.CreateGameRequest;
+import com.vou.common.proto.game.CreateGameResponse;
+import com.vou.common.proto.game.GameServiceGrpc;
+import com.vou.event_service.application.grpc.EventGrpcClient;
 import com.vou.event_service.application.service.EventService;
 import com.vou.event_service.application.service.VoucherService;
 import com.vou.event_service.domain.model.Event;
@@ -23,6 +27,10 @@ public class EventController {
     private EventService eventService;
     @Autowired
     private VoucherService voucherService;
+
+    @Autowired
+    private EventGrpcClient eventGrpcClient;
+
 
 
     // Get all events
@@ -51,6 +59,7 @@ public class EventController {
                 voucherService.saveVoucher(voucher);  // Save each voucher
             }
         }
+        eventGrpcClient.createGame(event);
 
         return ResponseEntity.ok(savedEvent);
     }

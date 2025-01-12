@@ -2,6 +2,8 @@ package com.vou.game_service.domain.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 public class EventGames {
 
@@ -13,7 +15,7 @@ public class EventGames {
     private Long eventId; // Foreign key referencing Events.event_id
 
     @Column(nullable = false)
-    private Long gameId; // Foreign key referencing Games.game_id
+    private UUID gameId; // Foreign key referencing Games.game_id
 
     // Getters and Setters
     public Long getId() {
@@ -32,11 +34,11 @@ public class EventGames {
         this.eventId = eventId;
     }
 
-    public Long getGameId() {
+    public UUID getGameId() {
         return gameId;
     }
 
-    public void setGameId(Long gameId) {
+    public void setGameId(UUID gameId) {
         this.gameId = gameId;
     }
 }

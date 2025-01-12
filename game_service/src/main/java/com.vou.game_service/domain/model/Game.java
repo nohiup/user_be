@@ -29,10 +29,6 @@ public class Game {
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime updatedAt;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    @JsonManagedReference  // This is the key to fix the issue
-    private List<GameItems> gameItemsList;
-
     // Getters and Setters
     public UUID getId() {
         return id;

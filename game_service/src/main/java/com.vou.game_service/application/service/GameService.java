@@ -29,13 +29,13 @@ public class GameService {
         game.setDescription(createGameRequest.getDescription());
         game = gameRepository.save(game);
 
-        // Save associated GameItems
-        if (createGameRequest.getGameItems() != null) {
-            for (GameItems item : createGameRequest.getGameItems()) {
-                item.setGame(game);
-                gameItemsRepository.save(item);
-            }
-        }
+//        // Save associated GameItems
+//        if (createGameRequest.getGameItems() != null) {
+//            for (GameItems item : createGameRequest.getGameItems()) {
+//                item.setGame(game);
+//                gameItemsRepository.save(item);
+//            }
+//        }
 
         return game;
     }
