@@ -16,7 +16,8 @@ public class EventService {
     private EventRepository eventRepository;
 
     public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+        // Fetch events with vouchers eagerly
+        return eventRepository.findAllWithVouchers();
     }
 
     public Event createEvent(Event event) {

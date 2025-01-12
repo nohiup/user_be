@@ -1,8 +1,13 @@
 package com.vou.event_service.adapter.in.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vou.event_service.application.service.EventService;
+import com.vou.event_service.application.service.VoucherService;
 import com.vou.event_service.domain.model.Event;
 import com.vou.event_service.domain.model.Voucher;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,9 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private VoucherService voucherService;
+
 
     // Get all events
     @GetMapping("/")
@@ -26,26 +34,24 @@ public class EventController {
 
     // Create a new event
     @PostMapping("/create")
+    @Transactional
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        // Check if event is valid
-        if (event == null) {
-            return ResponseEntity.badRequest().build(); // Return 400 if event is null
+        if (event == null || event.getName() == null || event.getStart() == null || event.getEndDate() == null) {
+            return ResponseEntity.badRequest().build();
         }
 
-        // Optional: Check if the event has vouchers, and if they are valid
+        // Save the event first (this will generate an event ID)
+        Event savedEvent = eventService.createEvent(event);
+
+        // Now handle the vouchers (if any)
         if (event.getVouchers() != null && !event.getVouchers().isEmpty()) {
+            // Iterate over vouchers and set the event_id (FK)
             for (Voucher voucher : event.getVouchers()) {
-                // Validate each voucher if necessary
-                if (voucher.getCode() == null || voucher.getCode().isEmpty()) {
-                    return ResponseEntity.badRequest().body(null); // Return 400 if voucher code is empty
-                }
+                voucher.setEvent(savedEvent); // Associate voucher with the saved event
+                voucherService.saveVoucher(voucher);  // Save each voucher
             }
         }
 
-        // Save event (with vouchers) using EventService
-        Event savedEvent = eventService.createEvent(event);
-
-        // Return the saved event
         return ResponseEntity.ok(savedEvent);
     }
 

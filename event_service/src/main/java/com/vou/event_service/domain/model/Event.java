@@ -1,7 +1,9 @@
 package com.vou.event_service.domain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
@@ -22,13 +24,14 @@ public class Event {
 
     private String image;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Manages the forward part of the relationship
-    private List<Voucher> vouchers = new ArrayList<>();
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @JsonManagedReference  // This is the key to fix the issue
+    private List<Voucher> vouchers;
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime start;
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime endDate;
+
     // Getters and Setters
     public UUID getId() {
         return id;
