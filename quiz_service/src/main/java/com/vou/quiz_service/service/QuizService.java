@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vou.quiz_service.event.QuizWsHandler;
 import com.vou.quiz_service.model.Question;
 import com.vou.quiz_service.repository.QuestionRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class QuizService {
@@ -22,24 +27,57 @@ public class QuizService {
     @Autowired
     private final QuizWsHandler quizWsHandler;
 
-//    private final SimpMessagingTemplate messagingTemplate;
+    private static final int MAX_QUESTIONS = 10;
+    private int counter = 0;
+    private boolean startSendingMessage = false;
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+
+    //    private final SimpMessagingTemplate messagingTemplate;
     @Autowired
     public QuizService(QuizWsHandler quizWsHandler) {
         this.quizWsHandler = quizWsHandler;
     }
 
-   @Scheduled(fixedRate = 3000) //temp 3s
-   public void sendQuizToClient() {
-       List<Question> questions = this.getAllQuestions();
+    // Hàm khởi chạy trì hoãn
+    @PostConstruct
+    public void initializeDelayedStart() {
+        executorService.scheduleAtFixedRate(() -> {
+            try {
+                long size = 0L;
+                // Gửi số lượng người chơi từ Redis
+                Set<String> keys = quizWsHandler.getRedisTemplate().keys("*");
+                size = keys.size();
+                String message = "Current players: " + size;
+                quizWsHandler.broadcastMessage(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 0, 5, TimeUnit.SECONDS);
 
-       Question quizMessage = questions.get(0);
-       ObjectMapper objectMapper = new ObjectMapper();
-       try {
-           quizWsHandler.broadcastMessage(objectMapper.writeValueAsString(quizMessage));
-       } catch (JsonProcessingException e) {
-           throw new RuntimeException(e);
-       }
-   }
+        // Chuyển trạng thái sau 30 giây
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> {
+            startSendingMessage = true; // Bật trạng thái gửi quiz
+            executorService.shutdown(); // Dừng task gửi số lượng người chơi
+            System.out.println("Event started");
+        }, 30, TimeUnit.SECONDS);
+
+    }
+
+    @Scheduled(fixedRate = 3000) //temp 3s
+    public void sendQuizToClient() {
+        if (!startSendingMessage || counter >= MAX_QUESTIONS) return;
+        List<Question> questions = this.getAllQuestions();
+
+        Question quizMessage = questions.get(0);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            quizWsHandler.broadcastMessage(objectMapper.writeValueAsString(quizMessage));
+            this.counter++;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
@@ -48,6 +86,5 @@ public class QuizService {
     public Question getQuestionById(Long id) {
         return questionRepository.findById(id).orElse(null);
     }
-
-
 }
+
