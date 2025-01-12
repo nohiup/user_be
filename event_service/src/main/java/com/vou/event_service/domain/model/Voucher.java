@@ -1,8 +1,10 @@
 package com.vou.event_service.domain.model;
 
-import com.google.type.DateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
@@ -15,10 +17,16 @@ public class Voucher {
     private String image;
     private String price;
     private String description;
-    private DateTime expired;
+    private OffsetDateTime expired;
     private String status;
 
-    public Voucher(UUID id, String code, String qr, String image, String price, String description, DateTime expired, String status) {
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    @JsonBackReference // Prevents infinite recursion during serialization
+    private Event event;
+
+    // Constructor
+    public Voucher(UUID id, String code, String qr, String image, String price, String description, OffsetDateTime expired, String status) {
         this.id = id;
         this.code = code;
         this.qr = qr;
@@ -29,19 +37,7 @@ public class Voucher {
         this.status = status;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
-
     // Getters and Setters
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -90,11 +86,11 @@ public class Voucher {
         this.description = description;
     }
 
-    public DateTime getExpired() {
+    public OffsetDateTime getExpired() { // Updated getter
         return expired;
     }
 
-    public void setExpired(DateTime expired) {
+    public void setExpired(OffsetDateTime expired) { // Updated setter
         this.expired = expired;
     }
 
@@ -106,3 +102,4 @@ public class Voucher {
         this.status = status;
     }
 }
+

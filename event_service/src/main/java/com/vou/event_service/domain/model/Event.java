@@ -1,8 +1,11 @@
 package com.vou.event_service.domain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,11 +23,12 @@ public class Event {
     private String image;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Voucher> vouchers;
-
-    private LocalDateTime start;
-
-    private LocalDateTime endDate;
+    @JsonManagedReference // Manages the forward part of the relationship
+    private List<Voucher> vouchers = new ArrayList<>();
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime start;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime endDate;
     // Getters and Setters
     public UUID getId() {
         return id;
@@ -50,19 +54,19 @@ public class Event {
         this.image = image;
     }
 
-    public LocalDateTime getStart() {
+    public OffsetDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(OffsetDateTime start) {
         this.start = start;
     }
 
-    public LocalDateTime getEndDate() {
+    public OffsetDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(OffsetDateTime endDate) {
         this.endDate = endDate;
     }
 
