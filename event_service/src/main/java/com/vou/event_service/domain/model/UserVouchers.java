@@ -15,7 +15,7 @@ public class UserVouchers {
     private UUID voucherId; // Foreign key referencing Vouchers.voucher_id
 
     @Column(nullable = false)
-    private UUID userId; // Foreign key referencing User.user_id
+    private String userId; // Foreign key referencing User.user_id
 
     @Column(nullable = false)
     private Integer quantity; // Quantity of vouchers owned by the user
@@ -40,11 +40,11 @@ public class UserVouchers {
         this.voucherId = voucherId;
     }
 
-    public UUID getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

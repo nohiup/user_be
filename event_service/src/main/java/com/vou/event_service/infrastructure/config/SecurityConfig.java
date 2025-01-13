@@ -14,6 +14,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/api/events/**").permitAll()
                         .pathMatchers("/api/eventParticipants/**").permitAll()// Allow unrestricted access
+                        .pathMatchers("/api/userVouchers/**").permitAll()// Allow unrestricted access
                         .anyExchange().authenticated() // Secure other endpoints
                 )
                 .csrf().disable() // Optional: Disable CSRF for APIs
