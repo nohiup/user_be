@@ -24,4 +24,8 @@ public class EventParticipantsService {
     public Optional<EventParticipants> findByEventIdAndUserId(Long eventId, String userId) {
         return eventParticipantsRepository.findByEventIdAndUserId(eventId, userId);
     }
+
+    public EventParticipants updateEventParticipant(EventParticipants participant) {
+        return eventParticipantsRepository.save(participant);
+    }
 }
