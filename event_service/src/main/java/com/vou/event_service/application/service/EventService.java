@@ -1,5 +1,8 @@
 package com.vou.event_service.application.service;
 
+import com.vou.common.proto.game.CreateGameRequest;
+import com.vou.common.proto.game.CreateGameResponse;
+import com.vou.common.proto.game.GameServiceGrpc;
 import com.vou.event_service.domain.model.Event;
 import com.vou.event_service.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +18,17 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
+
     public List<Event> getAllEvents() {
         // Fetch events with vouchers eagerly
         return eventRepository.findAllWithVouchers();
     }
 
     public Event createEvent(Event event) {
-        return eventRepository.save(event);
+        // Step 1: Create the Event
+        Event newEvent = new Event();
+        newEvent = eventRepository.save(event);
+        return newEvent;
     }
 
     public Optional<Event> getEventById(UUID id) {
