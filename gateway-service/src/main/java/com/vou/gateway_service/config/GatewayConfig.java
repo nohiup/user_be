@@ -24,6 +24,18 @@ public class GatewayConfig {
                 .route("auth-service", r -> r.path("/api/auth/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://auth-service"))
+
+                .route("event-service", r -> r.path("/api/events/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://event-service"))
+
+                .route("event-service", r -> r.path("/api/eventParticipants/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://event-service"))
+
+                .route("game-service", r -> r.path("/api/games/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://game-service"))
                 .build();
     }
 

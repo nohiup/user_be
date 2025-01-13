@@ -12,77 +12,77 @@ volumes:
     driver: local
 
 services:
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - /etc/prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    restart: unless-stopped
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-data:/var/lib/grafana
-    environment:
-      - 'GF_SMTP_ENABLED=true'
-      - 'GF_SMTP_HOST=smtp.gmail.com:587'
-      - 'GF_SMTP_USER=user1@gmail.com'
-      - 'GF_SMTP_PASSWORD=mysamplePassword'
-      - 'GF_SMTP_FROM_ADDRESS=user1@gmail.com'  
-     # - 'GF_SERVER_DOMAIN=grafana.my.domain'
-     # - 'GF_SERVER_ROOT_URL=grafana.my.domain'
-    restart: unless-stopped
-    
-  node_exporter:
-    image: quay.io/prometheus/node-exporter:latest
-    container_name: node_exporter
-    command:
-      - '--path.rootfs=/host'
-    pid: host
-    restart: unless-stopped
-    volumes:
-      - '/:/host:ro,rslave'
-  cadvisor:
-    image: google/cadvisor:latest
-    container_name: cadvisor
-    # ports:
-    #   - "8080:8080"
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    devices:
-      - /dev/kmsg
-    
-  loki:
-    image: grafana/loki:latest
-    container_name: loki
-    restart: unless-stopped
-    ports:
-      - "3100:3100"
-    command: -config.file=/etc/loki/config.yml -config.expand-env=true
-    volumes:
-      - ./loki.yaml:/etc/loki/config.yml
-
-
-  promtail:
-    image: grafana/promtail:latest
-    container_name: promtail
-    restart: unless-stopped
-    volumes:
-      - /home/ubuntu/log:/var/log/demo
-      - ./promtail.yaml:/etc/promtail/config.yml
-    command: -config.file=/etc/promtail/config.yml
+#  prometheus:
+#    image: prom/prometheus:latest
+#    container_name: prometheus
+#    ports:
+#      - "9090:9090"
+#    volumes:
+#      - /etc/prometheus:/etc/prometheus
+#      - prometheus-data:/prometheus
+#    restart: unless-stopped
+#    command:
+#      - "--config.file=/etc/prometheus/prometheus.yml"
+#
+#  grafana:
+#    image: grafana/grafana:latest
+#    container_name: grafana
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      - grafana-data:/var/lib/grafana
+#    environment:
+#      - 'GF_SMTP_ENABLED=true'
+#      - 'GF_SMTP_HOST=smtp.gmail.com:587'
+#      - 'GF_SMTP_USER=user1@gmail.com'
+#      - 'GF_SMTP_PASSWORD=mysamplePassword'
+#      - 'GF_SMTP_FROM_ADDRESS=user1@gmail.com'
+#     # - 'GF_SERVER_DOMAIN=grafana.my.domain'
+#     # - 'GF_SERVER_ROOT_URL=grafana.my.domain'
+#    restart: unless-stopped
+#
+#  node_exporter:
+#    image: quay.io/prometheus/node-exporter:latest
+#    container_name: node_exporter
+#    command:
+#      - '--path.rootfs=/host'
+#    pid: host
+#    restart: unless-stopped
+#    volumes:
+#      - '/:/host:ro,rslave'
+#  cadvisor:
+#    image: google/cadvisor:latest
+#    container_name: cadvisor
+#    # ports:
+#    #   - "8080:8080"
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#      - /dev/disk/:/dev/disk:ro
+#    devices:
+#      - /dev/kmsg
+#
+#  loki:
+#    image: grafana/loki:latest
+#    container_name: loki
+#    restart: unless-stopped
+#    ports:
+#      - "3100:3100"
+#    command: -config.file=/etc/loki/config.yml -config.expand-env=true
+#    volumes:
+#      - ./loki.yaml:/etc/loki/config.yml
+#
+#
+#  promtail:
+#    image: grafana/promtail:latest
+#    container_name: promtail
+#    restart: unless-stopped
+#    volumes:
+#      - /home/ubuntu/log:/var/log/demo
+#      - ./promtail.yaml:/etc/promtail/config.yml
+#    command: -config.file=/etc/promtail/config.yml
 
   auth-service:
     build:
@@ -108,6 +108,18 @@ services:
     container_name: gateway-service
     ports:
     - "8080:8080"
+  game-service:
+    build:
+      context: ./game_service
+    container_name: game-service
+    ports:
+      - "8094:8094"
+  event-service:
+    build:
+      context: ./event_service
+    container_name: event-service
+    ports:
+      - "8083:8083"
 
 
     
