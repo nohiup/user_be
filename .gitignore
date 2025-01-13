@@ -33,3 +33,5 @@ build/
 .vscode/
 auth_service/.env
 user_service/.env
+/.metadata/
+/.metadata/
