@@ -28,7 +28,7 @@ public class QuizWsHandler implements WebSocketHandler {
     public QuizWsHandler(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
         sessions = new ConcurrentHashMap<>();
-        System.out.println("Reset");
+        redisTemplate.getConnectionFactory().getConnection().flushDb(); //clear redisTemplate every re-run.
     }
 
 
@@ -68,6 +68,7 @@ public class QuizWsHandler implements WebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         logger.info("Connection closed on session: {} with status: {}", session.getId(), closeStatus.getCode());
+        redisTemplate.delete(session.getId());
     }
 
     @Override
@@ -77,7 +78,6 @@ public class QuizWsHandler implements WebSocketHandler {
 
     // Gửi thông điệp đến tất cả các client
     public void broadcastMessage(String message) {
-        System.out.println(sessions.size());
         Set<String> sessionKeys = redisTemplate.keys("*");
         if (!sessionKeys.isEmpty() && sessionKeys != null){
             sessionKeys.forEach(sessionKey ->{
@@ -94,6 +94,10 @@ public class QuizWsHandler implements WebSocketHandler {
 
     public synchronized void addSession(String sessionId, WebSocketSession session) {
         sessions.put(sessionId, session);
+    }
+
+    public StringRedisTemplate getRedisTemplate(){
+        return this.redisTemplate;
     }
 
 

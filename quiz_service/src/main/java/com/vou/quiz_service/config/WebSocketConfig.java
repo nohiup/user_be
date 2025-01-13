@@ -24,6 +24,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Autowired
     private QuizWsHandler quizWsHandler;
+
     @Autowired
     private StringRedisTemplate redisTemplate;
 
@@ -58,6 +59,8 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(quizWsHandler, "/quiz")
                 .setAllowedOrigins("*");
+
+
     }
 
 
