@@ -20,4 +20,12 @@ public class EventParticipantsService {
     public EventParticipants createEventParticipant(EventParticipants eventParticipants) {
         return eventParticipantsRepository.save(eventParticipants);
     }
+
+    public Optional<EventParticipants> findByEventIdAndUserId(Long eventId, String userId) {
+        return eventParticipantsRepository.findByEventIdAndUserId(eventId, userId);
+    }
+
+    public EventParticipants updateEventParticipant(EventParticipants participant) {
+        return eventParticipantsRepository.save(participant);
+    }
 }

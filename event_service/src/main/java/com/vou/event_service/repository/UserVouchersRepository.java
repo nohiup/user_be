@@ -1,9 +1,8 @@
 package com.vou.event_service.repository;
 
-import com.vou.event_service.domain.model.Event;
 import com.vou.event_service.domain.model.EventParticipants;
+import com.vou.event_service.domain.model.UserVouchers;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +10,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface EventParticipantsRepository extends JpaRepository<EventParticipants, Long> {
+public interface UserVouchersRepository extends JpaRepository<UserVouchers, UUID> {
 
-    Optional<EventParticipants> findByEventIdAndUserId(Long eventId, String userId);
+    Optional<UserVouchers> findByUserIdAndVoucherId(String userId, UUID voucherId);
+
+    List<UserVouchers> findByUserId(String userId);
 }
