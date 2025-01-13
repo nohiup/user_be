@@ -13,4 +13,5 @@ import java.util.UUID;
 @Repository
 public interface EventParticipantsRepository extends JpaRepository<EventParticipants, Long> {
 
+    Optional<EventParticipants> findByEventIdAndUserId(Long eventId, String userId);
 }

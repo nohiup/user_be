@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -56,5 +57,19 @@ public class EventParticipantsController {
         EventParticipants savedParticipant = eventParticipantsService.createEventParticipant(eventParticipant);
 
         return ResponseEntity.ok(savedParticipant);
+    }
+
+    @GetMapping
+    public ResponseEntity<EventParticipants> getEventParticipant(
+            @RequestParam String email, @RequestParam Long eventId) {
+
+        // Call user_service to get user_id from email
+        String userId = eventGrpcClient.GetUserIdFromEmail(email);
+
+        // Find event participant based on eventId and userId
+        Optional<EventParticipants> participant =
+                eventParticipantsService.findByEventIdAndUserId(eventId, userId);
+
+        return participant.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }
