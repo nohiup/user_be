@@ -1,46 +1,76 @@
 package com.vou.event_service.domain.model;
 
 
-import com.google.type.DateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
 
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    final UUID id;
-    final String name;
-    final String image;
+    private UUID id;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String name;
+
+    private String image;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @JsonManagedReference  // This is the key to fix the issue
     private List<Voucher> vouchers;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime start;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime endDate;
 
-    final DateTime start;
-    final DateTime end;
-
-
-    public Event(UUID id, String name, String image, DateTime start, DateTime end, List<Voucher> vouchers) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.start = start;
-        this.end = end;
-        this.vouchers = vouchers;
-    }
-
+    // Getters and Setters
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getImage() {
         return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public OffsetDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(OffsetDateTime start) {
+        this.start = start;
+    }
+
+    public OffsetDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(OffsetDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public List<Voucher> getVouchers() {
@@ -50,12 +80,5 @@ public class Event {
     public void setVouchers(List<Voucher> vouchers) {
         this.vouchers = vouchers;
     }
-
-    public DateTime getStart() {
-        return start;
-    }
-
-    public DateTime getEnd() {
-        return end;
-    }
 }
+
