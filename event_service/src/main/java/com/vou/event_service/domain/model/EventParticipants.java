@@ -14,7 +14,7 @@ public class EventParticipants {
     private Long eventId; // Foreign key referencing Events.event_id
 
     @Column(nullable = false)
-    private UUID userId; // Foreign key referencing User.user_id
+    private String userId; // Foreign key referencing User.user_id
 
     @Column(nullable = false)
     private Integer playerCredit; // Foreign key referencing PlayCredits.credits_available
@@ -57,11 +57,11 @@ public class EventParticipants {
         this.eventId = eventId;
     }
 
-    public UUID getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -46,8 +46,9 @@ public class EventGrpcClient {
         } catch (Exception e) {
             System.err.println("Error while creating game: " + e.getMessage());
             e.printStackTrace();
+            return null;
         }
-        return email;
+
     }
 
 }

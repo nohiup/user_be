@@ -42,7 +42,7 @@ public class EventParticipantsController {
         // Create new EventParticipants record with all quantities set to 0
         EventParticipants eventParticipant = new EventParticipants();
         eventParticipant.setEventId(eventId);
-        eventParticipant.setUserId(UUID.fromString(userId));
+        eventParticipant.setUserId(userId);
         eventParticipant.setPlayerCredit(0);
         eventParticipant.setQuantityV(0);
         eventParticipant.setQuantityO(0);
