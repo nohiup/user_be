@@ -22,7 +22,6 @@ message GetVoucherResponse{
   string status = 8;
 }
 
-
 service EventService {
   rpc getVoucherInfo(GetVoucherMessage) returns (GetVoucherResponse);
 }

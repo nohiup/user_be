@@ -20,7 +20,42 @@
     <dependencies>
         <!--Additional dependencies -->
 
-<!--        &lt;!&ndash;  https://mvnrepository.com/artifact/org.springframework.security/spring-security-web  &ndash;&gt;-->
+        <!-- Spring Boot Starter for WebSocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter for AMQP (RabbitMQ) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!--  https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-reactor-netty</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+
+
+
+
+        <!--        &lt;!&ndash;  https://mvnrepository.com/artifact/org.springframework.security/spring-security-web  &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.security</groupId>-->
 <!--            <artifactId>spring-security-web</artifactId>-->

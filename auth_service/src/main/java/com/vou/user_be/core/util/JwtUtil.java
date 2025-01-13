@@ -1,26 +1,42 @@
 package com.vou.user_be.core.util;
 
+import com.netflix.eureka.registry.ResponseCacheImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
 @Component
 public class JwtUtil {
 
-    private final Key secretKey =Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    @Value("${jwt.secret}")
+    private String secret;
+
+    private Key secretKey;
+
+    @PostConstruct
+    public void init() {
+        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+//    private final Key secretKey =Keys.secretKeyFor(SignatureAlgorithm.HS256);
     // Tạo JWT token
     public String generateToken(String username) {
+        System.out.println("secretKey: " + Base64.getEncoder().encodeToString(secretKey.getEncoded()));
         return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 6000))  // Hết hạn sau 1 giờ
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 

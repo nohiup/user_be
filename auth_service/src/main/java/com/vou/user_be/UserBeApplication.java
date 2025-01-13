@@ -9,12 +9,11 @@ import java.util.Objects;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-
 public class UserBeApplication {
-
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.configure()
-				.directory("auth_service")
+//				.directory("auth_service")
+				.directory("./")
 				.load();
 		System.setProperty("DB_URL", Objects.requireNonNull(dotenv.get("DB_URL")));
 		System.setProperty("DB_USERNAME", Objects.requireNonNull(dotenv.get("DB_USERNAME")));
