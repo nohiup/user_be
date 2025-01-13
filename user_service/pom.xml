@@ -5,6 +5,7 @@
     <parent>
         <groupId>com.vou</groupId>
         <artifactId>project-root</artifactId>
+
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -28,19 +29,18 @@
         <!-- Spring Boot Starters -->
         <!--Additional dependencies -->
 
-        
-        <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency><!--  https://mvnrepository.com/artifact/org.springframework.security/spring-security-web  -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>6.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -66,12 +66,6 @@
             <version>0.12.6</version>
         </dependency>
 
-        <!-- Logback Classic (Logback implementation for SLF4J) -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.12</version> <!-- Hoặc phiên bản mới nhất -->
-        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
