@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+jwt:
+  secret: SaFinalProject_SaFinalProject_SaFinalProject_SaFinalProject

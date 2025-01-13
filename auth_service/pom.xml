@@ -55,13 +55,13 @@
                 <version>3.4.1</version>
             </dependency>
             <dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-webflux</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-gateway-mvc</artifactId>
-			</dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+            </dependency>
             <dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -77,9 +77,12 @@
                 <artifactId>java-dotenv</artifactId>
                 <version>5.2.2</version>
             </dependency>
+            <dependency>
+                <groupId>com.netflix.eureka</groupId>
+                <artifactId>eureka-core</artifactId>
+            </dependency>
 
         </dependencies>
-
 
 
         <build>
@@ -103,5 +106,14 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
             </plugins>
+
+<!--            <resources>-->
+<!--                <resource>-->
+<!--                    <directory>src/main/resources</directory>-->
+<!--                    <excludes>-->
+<!--                        <exclude>logback.xml</exclude>-->
+<!--                    </excludes>-->
+<!--                </resource>-->
+<!--            </resources>-->
         </build>
     </project>

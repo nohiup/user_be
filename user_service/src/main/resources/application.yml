@@ -1,0 +1,12 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+  instance:
+    preferIpAddress: true
+#    ip-address: 192.168.2.239
+
+spring:
+  cloud:
+    discovery:
+      enabled: true
