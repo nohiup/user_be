@@ -12,87 +12,37 @@ public class Voucher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false, unique = true)
     private String code;
+
     private String qr;
+
     private String image;
-    private String price;
+
+    @Column(nullable = false)
+    private Integer price;
+
     private String description;
 
-    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false)
     private OffsetDateTime expired;
 
+    @Column(nullable = false)
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
-    @JsonBackReference  // Preventing infinite recursion
+    @JoinColumn(name = "event_id", nullable = false)
+    @JsonBackReference // Prevents infinite recursion during JSON serialization
     private Event event;
 
-    private Integer quantityV;
-    private Integer quantityO;
-    private Integer quantityU;
-    private Integer quantityC;
-    private Integer quantityH;
-    private Integer quantityE;
-    private Integer quantityR;
+    @Column(name = "init_quantity", nullable = false)
+    private Integer initQuantity;
 
-    public Integer getQuantityV() {
-        return quantityV;
-    }
-
-    public void setQuantityV(Integer quantityV) {
-        this.quantityV = quantityV;
-    }
-
-    public Integer getQuantityO() {
-        return quantityO;
-    }
-
-    public void setQuantityO(Integer quantityO) {
-        this.quantityO = quantityO;
-    }
-
-    public Integer getQuantityU() {
-        return quantityU;
-    }
-
-    public void setQuantityU(Integer quantityU) {
-        this.quantityU = quantityU;
-    }
-
-    public Integer getQuantityC() {
-        return quantityC;
-    }
-
-    public void setQuantityC(Integer quantityC) {
-        this.quantityC = quantityC;
-    }
-
-    public Integer getQuantityH() {
-        return quantityH;
-    }
-
-    public void setQuantityH(Integer quantityH) {
-        this.quantityH = quantityH;
-    }
-
-    public Integer getQuantityE() {
-        return quantityE;
-    }
-
-    public void setQuantityE(Integer quantityE) {
-        this.quantityE = quantityE;
-    }
-
-    public Integer getQuantityR() {
-        return quantityR;
-    }
-
-    public void setQuantityR(Integer quantityR) {
-        this.quantityR = quantityR;
-    }
+    @Column(name = "current_quantity", nullable = false)
+    private Integer currentQuantity;
 
     // Getters and Setters
+
     public UUID getId() {
         return id;
     }
@@ -125,11 +75,11 @@ public class Voucher {
         this.image = image;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -163,5 +113,21 @@ public class Voucher {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Integer getInitQuantity() {
+        return initQuantity;
+    }
+
+    public void setInitQuantity(Integer initQuantity) {
+        this.initQuantity = initQuantity;
+    }
+
+    public Integer getCurrentQuantity() {
+        return currentQuantity;
+    }
+
+    public void setCurrentQuantity(Integer currentQuantity) {
+        this.currentQuantity = currentQuantity;
     }
 }
