@@ -1,8 +1,11 @@
 package com.vou.game_service.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -18,9 +21,6 @@ public class Game {
     private String type;
 
     private String image;
-
-    private Boolean allowItemExchange;
-
     private String description;
 
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
@@ -60,14 +60,6 @@ public class Game {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public Boolean getAllowItemExchange() {
-        return allowItemExchange;
-    }
-
-    public void setAllowItemExchange(Boolean allowItemExchange) {
-        this.allowItemExchange = allowItemExchange;
     }
 
     public String getDescription() {
