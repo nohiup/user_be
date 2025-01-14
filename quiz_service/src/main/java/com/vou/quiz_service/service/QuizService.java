@@ -2,6 +2,7 @@ package com.vou.quiz_service.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.type.DateTime;
 import com.vou.quiz_service.event.QuizWsHandler;
 import com.vou.quiz_service.model.Question;
 import com.vou.quiz_service.repository.QuestionRepository;
@@ -12,7 +13,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -27,8 +30,10 @@ public class QuizService {
     @Autowired
     private final QuizWsHandler quizWsHandler;
 
-    private static final int MAX_QUESTIONS = 10;
+    private static final int MAX_QUESTIONS = 5;
     private int counter = 0;
+
+    private int currentIndex =0;
     private boolean startSendingMessage = false;
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
@@ -47,8 +52,6 @@ public class QuizService {
                 // Gửi số lượng người chơi từ Redis
                 Set<String> keys = quizWsHandler.getRedisTemplate().keys("*");
                 size = keys.size();
-                String message = "Current players: " + size;
-                quizWsHandler.broadcastMessage(message);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -63,12 +66,20 @@ public class QuizService {
 
     }
 
-    @Scheduled(fixedRate = 3000) //temp 3s
+    @Scheduled(fixedRate = 5000) //temp 3s
     public void sendQuizToClient() {
-        if (!startSendingMessage || counter >= MAX_QUESTIONS) return;
+        if (!startSendingMessage) {
+            return;
+        }
+        if (counter >= MAX_QUESTIONS) {
+            quizWsHandler.broadcastMessage("finish");
+            return;
+        }
         List<Question> questions = this.getAllQuestions();
 
-        Question quizMessage = questions.get(0);
+
+        Question quizMessage = questions.get(currentIndex);
+        currentIndex ++;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             quizWsHandler.broadcastMessage(objectMapper.writeValueAsString(quizMessage));

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,6 +24,7 @@ public class QuizWsHandler implements WebSocketHandler {
 
     private final StringRedisTemplate redisTemplate;
     private final ConcurrentHashMap<String, WebSocketSession> sessions;
+    private final Instant i = Instant.now();
 
     @Autowired
     public QuizWsHandler(StringRedisTemplate redisTemplate) {
@@ -34,8 +36,19 @@ public class QuizWsHandler implements WebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        // In thông tin client khi kết nối thành công
-        this.addSession(session.getId(), session); // Lưu session
+
+        long message = i.getEpochSecond() + 30; //+30s wait room
+        if (Instant.now().getEpochSecond() > message) {
+            session.sendMessage(new TextMessage("Refuse"));
+            session.close();
+        }
+        else {
+            // In thông tin client khi kết nối thành công
+            this.addSession(session.getId(), session);
+            session.sendMessage(new TextMessage(String.valueOf(message)));
+        }
+
+       // Lưu session
         System.out.println("Client connected: " + sessions.size());
     }
 
