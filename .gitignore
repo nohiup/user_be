@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+auth_service/.env
+user_service/.env
+event_service/.env
+game_service/.env
+/.metadata/
+/.metadata/
