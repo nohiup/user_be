@@ -1,17 +1,28 @@
 package com.vou.game_service.adapter.in.web.dto;
 
 import com.vou.game_service.domain.model.GameItems;
+import com.vou.game_service.domain.model.Question;
+
 import java.util.List;
 
 public class CreateGameRequest {
     private String name;
     private String type;
     private String image;
-    private Boolean allowItemExchange;
     private String description;
-    private List<GameItems> gameItems;
+
+    // Adding the list of questions for game creation
+    private List<Question> questions;
 
     // Getters and Setters
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
     public String getName() {
         return name;
     }
@@ -36,14 +47,6 @@ public class CreateGameRequest {
         this.image = image;
     }
 
-    public Boolean getAllowItemExchange() {
-        return allowItemExchange;
-    }
-
-    public void setAllowItemExchange(Boolean allowItemExchange) {
-        this.allowItemExchange = allowItemExchange;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -52,11 +55,4 @@ public class CreateGameRequest {
         this.description = description;
     }
 
-    public List<GameItems> getGameItems() {
-        return gameItems;
-    }
-
-    public void setGameItems(List<GameItems> gameItems) {
-        this.gameItems = gameItems;
-    }
 }
