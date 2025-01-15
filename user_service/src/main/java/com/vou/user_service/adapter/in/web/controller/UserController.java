@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PutMapping("/{id}/profile")
+    @PutMapping("/{id}/profile/{role}")
     public ResponseEntity<?> updateProfile(@PathVariable String id, @RequestBody UpdateProfileRequest request) {
         try {
             userService.updateUserProfile(id, request);
@@ -33,10 +33,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{id}/profile")
-    public ResponseEntity<?> getProfile(@PathVariable String id, @RequestBody GetProfileRequest request) {
+    @GetMapping("/{id}/profile/{role}")
+    public ResponseEntity<?> getProfile(@PathVariable String id, @PathVariable String role) {
         try {
-            Object obj = userService.getProfile(id, request);
+            Object obj = userService.getProfile(id, role);
             return ResponseEntity.ok().body(obj);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(Map.of("message","Failed to get profile: " + e.getMessage()));
@@ -45,10 +45,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllObject(@RequestBody GetAllObjectRequest request) {
+    @GetMapping("/all/{role}")
+    public ResponseEntity<?> getAllObject(@PathVariable String role) {
         try {
-            Object obj = userService.getAllObject(request);
+            GetAllObjectRequest request1 = new GetAllObjectRequest(role);
+            Object obj = userService.getAllObject(request1);
             return ResponseEntity.ok().body(obj);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(Map.of("message","Failed to get all object: " + e.getMessage()));

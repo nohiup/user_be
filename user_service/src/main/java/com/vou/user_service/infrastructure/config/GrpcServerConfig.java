@@ -11,7 +11,7 @@ public class GrpcServerConfig {
 
     @Bean
     public Server grpcServer(UserGrpcServiceImpl userGrpcService) throws Exception {
-        Server server =  ServerBuilder.forPort(9091)
+        Server server =  ServerBuilder.forPort(50001)
                 .addService(userGrpcService)
                 .build()
                 .start();

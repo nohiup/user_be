@@ -65,8 +65,8 @@ public class UserService {
         }
     }
 
-    public Object getProfile(String id, GetProfileRequest request) {
-        String role = request.getRole().toLowerCase();
+    public Object getProfile(String id, String role) {
+//        String role = request.getRole().toLowerCase();
         GetProfileStrategy strategy = getProfileStrategy.get(role);
 
         if (strategy == null) {

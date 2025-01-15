@@ -7,6 +7,7 @@ import com.vou.user_be.adapter.out.persistence.UserRepository;
 import com.vou.user_be.core.constant.AccountStatus;
 import com.vou.user_be.core.util.JwtUtil;
 import com.vou.user_be.domain.model.Auth;
+import com.vou.user_be.domain.model.LoginResponse;
 import com.vou.user_be.infrastructure.security.CustomizedPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,12 @@ public class AuthenticateService {
         this.jwtUtil = jwtUtil;
     }
 
-    public String login(String email, String password) {
+    public LoginResponse login(String email, String password) {
         // Kiểm tra email và password
         if (email == null || password == null) {
             throw new MissingDataException("Missing required fields");
         }
+
         System.out.println(email + " " + password);
         if (userRepository.findByEmail(email).isEmpty()
                 || userRepository.findByEmail(email).get().getStatus().equals(AccountStatus.getInstance().PENDING)
@@ -44,7 +46,9 @@ public class AuthenticateService {
         }
 
         // Tạo JWT token
-        return jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user.getEmail());
+
+        return new LoginResponse(token, user.getId());
     }
 
 }
