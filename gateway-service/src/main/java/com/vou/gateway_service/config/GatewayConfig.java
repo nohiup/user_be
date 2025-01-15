@@ -38,5 +38,4 @@ public class GatewayConfig {
                         .uri("lb://game-service"))
                 .build();
     }
-
 }

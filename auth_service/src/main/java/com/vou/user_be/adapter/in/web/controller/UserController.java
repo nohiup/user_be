@@ -8,6 +8,7 @@ import com.vou.user_be.application.service.AuthenticateService;
 import com.vou.user_be.application.service.UserService;
 import com.vou.user_be.domain.model.JwtResponse;
 import com.vou.user_be.domain.model.Auth;
+import com.vou.user_be.domain.model.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +58,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        String token = authenticateService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        return ResponseEntity.ok(new JwtResponse(token));
+        LoginResponse res = authenticateService.login(loginRequest.getEmail(), loginRequest.getPassword());
+        return ResponseEntity.ok(Map.of("token", res.getToken(), "id", res.getUserId()));
     }
 }

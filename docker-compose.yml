@@ -4,6 +4,8 @@ version: '3.3'
 networks:
   monitor:
     driver: bridge
+#  redis-net:
+#    driver: bridge
 
 volumes:
   prometheus-data:
@@ -90,36 +92,68 @@ services:
     container_name: auth-service
     ports:
       - "8088:8088"
+      - "50000:50000"
+#    networks:
+#      - redis-net
+
   user-service:
     build:
       context: ./user_service
     container_name: user-service
     ports:
       - "8082:8082"
+      - "50001:50001"
+#    networks:
+#      - redis-net
+
   discovery-service:
     build:
       context: ./discovery-service
     container_name: discovery-service
     ports:
       - "8761:8761"
+#    networks:
+#      - redis-net
+
   gateway-service:
     build:
         context: ./gateway-service
     container_name: gateway-service
     ports:
     - "8080:8080"
+#    networks:
+#      - redis-net
+
   game-service:
     build:
       context: ./game_service
     container_name: game-service
     ports:
       - "8094:8094"
+#    networks:
+#      - redis-net
+
   event-service:
     build:
       context: ./event_service
     container_name: event-service
     ports:
       - "8083:8083"
+#    networks:
+#      - redis-net
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+##    volumes:
+##      - ./redis.conf:/usr/local/etc/redis/redis.conf  # Mount file redis.conf
+##    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]  # Chạy Redis với cấu hình tùy chỉnh
+#    restart: always
+#    networks:
+#      - redis-net
+
 
 
     

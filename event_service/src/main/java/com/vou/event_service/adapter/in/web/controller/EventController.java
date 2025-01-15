@@ -34,7 +34,7 @@ public class EventController {
 
 
     // Get all events
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<Event>> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
         return ResponseEntity.ok(events);
@@ -47,7 +47,7 @@ public class EventController {
         if (event == null || event.getName() == null || event.getStart() == null || event.getEndDate() == null) {
             return ResponseEntity.badRequest().build();
         }
-
+        System.out.println("Event: " + event);
         // Save the event first (this will generate an event ID)
         Event savedEvent = eventService.createEvent(event);
 
